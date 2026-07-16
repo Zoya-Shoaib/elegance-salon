@@ -11,8 +11,8 @@
     <!-- Tailwind CSS (must come before tailwind-config) -->
   <!-- Custom Styles -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script src="script.js"></script>
-  <link rel="stylesheet" href="style.css">
+  <script src="{{ asset('script.js') }}"></script>
+  <link rel="stylesheet" href="{{ asset('style.css') }}">
 </head>
 <body class="overflow-hidden flex h-screen w-screen bg-background">
   <!-- Sidebar Navigation -->
