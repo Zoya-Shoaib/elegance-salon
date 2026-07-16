@@ -1,0 +1,273 @@
+@extends('receptionist.layout.rec-layout')
+@section('content')
+
+    <!-- Content Area -->
+    <div class="flex-grow p-8 overflow-y-auto scrollbar-lux flex flex-col">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h2 class="font-serif text-3xl font-bold text-primary">Appointment Scheduling</h2>
+          <p class="text-sm text-gray-500">Manage weekly bookings and staff availability.</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="bg-surface border border-secondary text-primary font-bold text-xs px-5 py-3 rounded-full hover:bg-background transition-colors flex items-center gap-1.5 shadow-sm">
+            <span class="material-symbols-outlined text-sm">edit_calendar</span>
+            <span>Reschedule Slot</span>
+          </button>
+          <button class="bg-secondary text-primary-container font-bold text-xs px-5 py-3 rounded-full hover:bg-[#EDD98A] transition-colors flex items-center gap-1.5 shadow-lg" onclick="document.getElementById('bookingModal').classList.remove('hidden')">
+            <span class="material-symbols-outlined text-sm">calendar_add_on</span>
+            <span>Book Appointment</span>
+          </button>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 flex-grow min-h-0">
+        <!-- Left Panel: Calendar Nav & Integrations -->
+        <div class="lg:col-span-1 space-y-6 overflow-y-auto pr-2 scrollbar-lux">
+          <!-- Mini Month Navigator -->
+          <div class="bg-surface border border-secondary/20 rounded-2xl p-6 shadow-lg">
+            <div class="flex items-center justify-between mb-4">
+              <button class="text-gray-400 hover:text-primary"><i class="fas fa-chevron-left"></i></button>
+              <h4 class="font-serif text-lg font-bold text-primary">July 2026</h4>
+              <button class="text-gray-400 hover:text-primary"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="grid grid-cols-7 gap-1 text-center text-xs font-bold text-gray-400 mb-2">
+              <div>Su</div><div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div>
+            </div>
+            <div class="grid grid-cols-7 gap-1 text-center text-sm">
+              <div class="p-1 text-gray-300">28</div><div class="p-1 text-gray-300">29</div><div class="p-1 text-gray-300">30</div>
+              <div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">1</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">2</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">3</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">4</div>
+              <div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">5</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">6</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">7</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">8</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">9</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">10</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">11</div>
+              <div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">12</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">13</div><div class="p-1 bg-secondary text-white font-bold rounded-full cursor-pointer shadow">14</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">15</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">16</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">17</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">18</div>
+              <div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">19</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">20</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">21</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">22</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">23</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">24</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">25</div>
+              <div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">26</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">27</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">28</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">29</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">30</div><div class="p-1 rounded-full hover:bg-gray-100 cursor-pointer">31</div><div class="p-1 text-gray-300">1</div>
+            </div>
+          </div>
+          <!-- Stylist Filter -->
+          <div class="bg-surface border border-secondary/20 rounded-2xl p-6 shadow-lg">
+            <h4 class="font-bold text-primary mb-4 text-sm uppercase tracking-wider">Filter by Stylist</h4>
+            <div class="space-y-3">
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" checked="" class="form-checkbox text-primary rounded border-gray-300 focus:ring-primary">
+                <span class="text-sm">Clarissa Gold (Hair)</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" checked="" class="form-checkbox text-secondary rounded border-gray-300 focus:ring-secondary">
+                <span class="text-sm">Dr. Helen (Skin)</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" checked="" class="form-checkbox text-blue-500 rounded border-gray-300 focus:ring-blue-500">
+                <span class="text-sm">Mia Valentina (Nails)</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" checked="" class="form-checkbox text-purple-500 rounded border-gray-300 focus:ring-purple-500">
+                <span class="text-sm">Victoria (Makeup)</span>
+              </label>
+            </div>
+          </div>
+          <!-- Integration Widget -->
+          <div class="bg-gradient-to-br from-primary-container to-primary border border-secondary/30 rounded-2xl p-6 shadow-lg text-white">
+            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-secondary mb-4 border border-secondary/30">
+              <i class="fas fa-sync-alt"></i>
+            </div>
+            <h4 class="font-serif text-lg font-bold mb-2">Calendar Sync</h4>
+            <p class="text-xs text-white/70 mb-4">Keep your schedules aligned by syncing this roster with external calendars.</p>
+            <button class="w-full bg-white/10 border border-white/20 text-white font-bold text-xs py-2.5 rounded hover:bg-white/20 transition-colors flex items-center justify-center gap-2">
+              <i class="fab fa-google"></i> Sync with Google / iCal
+            </button>
+          </div>
+        </div>
+        <!-- Right Panel: Weekly Grid Schedule -->
+        <div class="lg:col-span-3 bg-surface border border-secondary/20 rounded-2xl shadow-lg flex flex-col overflow-hidden">
+          <!-- Grid Header (Days) -->
+          <div class="flex bg-gray-50 border-b border-gray-200">
+            <div class="w-16 shrink-0 border-r border-gray-200"></div>
+            <div class="flex-grow grid grid-cols-7 divide-x divide-gray-200">
+              <div class="p-3 text-center">
+                <div class="text-[10px] font-bold uppercase text-gray-500">Mon</div>
+                <div class="text-lg font-serif font-bold text-primary">13</div>
+              </div>
+              <div class="p-3 text-center bg-secondary/10 border-b-2 border-b-secondary">
+                <div class="text-[10px] font-bold uppercase text-secondary">Tue</div>
+                <div class="text-lg font-serif font-bold text-primary">14</div>
+              </div>
+              <div class="p-3 text-center">
+                <div class="text-[10px] font-bold uppercase text-gray-500">Wed</div>
+                <div class="text-lg font-serif font-bold text-primary">15</div>
+              </div>
+              <div class="p-3 text-center">
+                <div class="text-[10px] font-bold uppercase text-gray-500">Thu</div>
+                <div class="text-lg font-serif font-bold text-primary">16</div>
+              </div>
+              <div class="p-3 text-center">
+                <div class="text-[10px] font-bold uppercase text-gray-500">Fri</div>
+                <div class="text-lg font-serif font-bold text-primary">17</div>
+              </div>
+              <div class="p-3 text-center">
+                <div class="text-[10px] font-bold uppercase text-gray-500">Sat</div>
+                <div class="text-lg font-serif font-bold text-primary">18</div>
+              </div>
+              <div class="p-3 text-center bg-gray-100">
+                <div class="text-[10px] font-bold uppercase text-gray-400">Sun</div>
+                <div class="text-lg font-serif font-bold text-gray-400">19</div>
+              </div>
+            </div>
+          </div>
+          <!-- Grid Body (Hours & Appointments) -->
+          <div class="flex-grow overflow-y-auto scrollbar-lux relative">
+            <div class="flex relative min-h-[800px]">
+              <!-- Time Column -->
+              <div class="w-16 shrink-0 border-r border-gray-200 flex flex-col divide-y divide-gray-100 text-[10px] text-gray-400 font-bold text-center">
+                <div class="h-20 flex items-start justify-center pt-2">9:00 AM</div>
+                <div class="h-20 flex items-start justify-center pt-2">10:00 AM</div>
+                <div class="h-20 flex items-start justify-center pt-2">11:00 AM</div>
+                <div class="h-20 flex items-start justify-center pt-2">12:00 PM</div>
+                <div class="h-20 flex items-start justify-center pt-2">1:00 PM</div>
+                <div class="h-20 flex items-start justify-center pt-2">2:00 PM</div>
+                <div class="h-20 flex items-start justify-center pt-2">3:00 PM</div>
+                <div class="h-20 flex items-start justify-center pt-2">4:00 PM</div>
+                <div class="h-20 flex items-start justify-center pt-2">5:00 PM</div>
+                <div class="h-20 flex items-start justify-center pt-2">6:00 PM</div>
+              </div>
+              <!-- Days Columns (Background grid) -->
+              <div class="flex-grow grid grid-cols-7 divide-x divide-gray-100 absolute inset-0 left-16 z-0">
+                <div class="flex flex-col divide-y divide-gray-50"><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div></div>
+                <div class="flex flex-col divide-y divide-gray-50 bg-secondary/5"><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div></div>
+                <div class="flex flex-col divide-y divide-gray-50"><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div></div>
+                <div class="flex flex-col divide-y divide-gray-50"><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div></div>
+                <div class="flex flex-col divide-y divide-gray-50"><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div></div>
+                <div class="flex flex-col divide-y divide-gray-50"><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div></div>
+                <div class="flex flex-col divide-y divide-gray-50 bg-gray-50"><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div></div>
+              </div>
+              <!-- Static Pre-rendered Appointment Blocks (z-10) -->
+              <!-- Each column is ~14.28%. Top is hours * 80px -->
+              <div class="absolute inset-0 left-16 z-10 pointer-events-none">
+                <!-- Monday 10am-11:30am (Top: 80px, Height: 120px) -->
+                <div class="absolute w-[calc(14.28%-8px)] left-[4px] top-[80px] h-[120px] bg-emerald-50 border-primary apt-block rounded-r p-2 pointer-events-auto">
+                  <div class="text-[10px] font-bold text-primary">10:00 AM - 11:30 AM</div>
+                  <div class="text-xs font-bold text-gray-800">Isabella Swan</div>
+                  <div class="text-[10px] text-gray-500 truncate">Balayage (Clarissa)</div>
+                </div>
+                <!-- Tuesday (Today) 11am-12pm -->
+                <div class="absolute w-[calc(14.28%-8px)] left-[calc(14.28%+4px)] top-[160px] h-[80px] bg-amber-50 border-secondary apt-block rounded-r p-2 pointer-events-auto">
+                  <div class="text-[10px] font-bold text-secondary">11:00 AM - 12:00 PM</div>
+                  <div class="text-xs font-bold text-gray-800">Maria Garcia</div>
+                  <div class="text-[10px] text-gray-500 truncate">Hydration Facial (Helen)</div>
+                </div>
+                <!-- Tuesday (Today) 1pm-2:30pm -->
+                <div class="absolute w-[calc(14.28%-8px)] left-[calc(14.28%+4px)] top-[320px] h-[120px] bg-blue-50 border-blue-500 apt-block rounded-r p-2 pointer-events-auto">
+                  <div class="text-[10px] font-bold text-blue-600">1:00 PM - 2:30 PM</div>
+                  <div class="text-xs font-bold text-gray-800">Chloe Jensen</div>
+                  <div class="text-[10px] text-gray-500 truncate">Gel Mani/Pedi (Mia)</div>
+                </div>
+                <!-- Wednesday 2pm-3pm -->
+                <div class="absolute w-[calc(14.28%-8px)] left-[calc(28.56%+4px)] top-[400px] h-[80px] bg-purple-50 border-purple-500 apt-block rounded-r p-2 pointer-events-auto">
+                  <div class="text-[10px] font-bold text-purple-600">2:00 PM - 3:00 PM</div>
+                  <div class="text-xs font-bold text-gray-800">Emily Blunt</div>
+                  <div class="text-[10px] text-gray-500 truncate">Bridal Trial (Victoria)</div>
+                </div>
+                <!-- Thursday 9am-10:30am -->
+                <div class="absolute w-[calc(14.28%-8px)] left-[calc(42.84%+4px)] top-[0px] h-[120px] bg-emerald-50 border-primary apt-block rounded-r p-2 pointer-events-auto">
+                  <div class="text-[10px] font-bold text-primary">9:00 AM - 10:30 AM</div>
+                  <div class="text-xs font-bold text-gray-800">Sophia Loren</div>
+                  <div class="text-[10px] text-gray-500 truncate">Color Retouch (Clarissa)</div>
+                </div>
+                <!-- Friday 4pm-5pm -->
+                <div class="absolute w-[calc(14.28%-8px)] left-[calc(57.12%+4px)] top-[560px] h-[80px] bg-amber-50 border-secondary apt-block rounded-r p-2 pointer-events-auto">
+                  <div class="text-[10px] font-bold text-secondary">4:00 PM - 5:00 PM</div>
+                  <div class="text-xs font-bold text-gray-800">Natalie Portman</div>
+                  <div class="text-[10px] text-gray-500 truncate">Dermaplaning (Helen)</div>
+                </div>
+              </div>
+              <!-- Current Time Line Indicator (e.g. Tuesday 11:30 AM) -->
+              <div class="absolute left-16 right-0 top-[200px] z-20 flex items-center pointer-events-none">
+                <div class="w-2 h-2 rounded-full bg-red-500 -ml-1"></div>
+                <div class="h-px bg-red-500 flex-grow shadow-[0_0_4px_rgba(239,68,68,0.5)]"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- Modals (Hidden by Default) -->
+  <!-- Book Appointment Modal -->
+  <div id="bookingModal" class="fixed inset-0 z-[100] modal-overlay hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl border border-secondary/20 overflow-hidden transform transition-all">
+      <div class="bg-primary-container p-6 flex justify-between items-center text-white border-b border-secondary/30">
+        <h3 class="font-serif text-2xl font-bold text-secondary">Book Appointment</h3>
+        <button class="text-white/60 hover:text-white transition-colors" onclick="document.getElementById('bookingModal').classList.add('hidden')">
+          <i class="fas fa-times text-xl"></i>
+        </button>
+      </div>
+      <div class="p-8">
+        <form class="space-y-6" onsubmit="event.preventDefault(); document.getElementById('bookingModal').classList.add('hidden');">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Client Selection -->
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Select Client</label>
+              <div class="relative">
+                <select class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary appearance-none cursor-pointer">
+                  <option value="" disabled="" selected="">Search directory...</option>
+                  <option>Isabella Swan</option>
+                  <option>Maria Garcia</option>
+                  <option>Chloe Jensen</option>
+                  <option>+ Add New Client</option>
+                </select>
+                <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400"><i class="fas fa-chevron-down text-xs"></i></div>
+              </div>
+            </div>
+            <!-- Stylist Selection -->
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Assigned Stylist</label>
+              <div class="relative">
+                <select class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary appearance-none cursor-pointer">
+                  <option>Clarissa Gold (Hair)</option>
+                  <option>Dr. Helen (Skin)</option>
+                  <option>Mia Valentina (Nails)</option>
+                  <option>Victoria (Makeup)</option>
+                </select>
+                <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400"><i class="fas fa-chevron-down text-xs"></i></div>
+              </div>
+            </div>
+          </div>
+          <!-- Service Selection -->
+          <div>
+            <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Service Requested</label>
+            <div class="relative">
+              <select class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary appearance-none cursor-pointer">
+                <option>Balayage Color &amp; Cut ($250)</option>
+                <option>Hydration Facial ($150)</option>
+                <option>Gel Manicure &amp; Pedicure ($120)</option>
+                <option>Bridal Makeup Trial ($180)</option>
+              </select>
+              <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400"><i class="fas fa-chevron-down text-xs"></i></div>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Date Picker -->
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Date</label>
+              <input type="date" class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary text-gray-700" value="2026-07-15">
+            </div>
+            <!-- Time Picker -->
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Time Slot</label>
+              <input type="time" class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary text-gray-700" value="10:00">
+            </div>
+          </div>
+          <!-- Checkbox -->
+          <div class="pt-2 pb-4 border-b border-gray-100">
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" checked="" class="form-checkbox w-5 h-5 text-secondary rounded border-gray-300 focus:ring-secondary">
+              <span class="text-sm font-semibold text-gray-700">Send Automated SMS/Email Confirmation to Client</span>
+            </label>
+          </div>
+          <!-- Actions -->
+          <div class="flex items-center justify-end gap-4 mt-8">
+            <button type="button" class="px-6 py-3 border border-gray-300 text-gray-600 font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-gray-50 transition-colors" onclick="document.getElementById('bookingModal').classList.add('hidden')">Cancel</button>
+            <button type="submit" class="px-8 py-3 bg-secondary text-primary-container border border-secondary font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-[#EDD98A] transition-colors shadow-lg">Confirm Booking</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+@endsection
