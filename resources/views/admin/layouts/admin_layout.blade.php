@@ -32,11 +32,15 @@
           <span class="material-symbols-outlined text-lg">calendar_month</span>
           <span>Calendar Scheduler</span>
         </a>
+        <a href="{{route('appointments.index')}}" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 font-medium transition-colors">
+          <span class="material-symbols-outlined text-lg">event</span>
+          <span>Appointments</span>
+        </a>
         <a href="{{route('admin.clients')}}" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 font-medium transition-colors">
           <span class="material-symbols-outlined text-lg">group</span>
           <span>Clients Directory</span>
         </a>
-        <a href="{{route('admin.inventory')}}" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 font-medium transition-colors">
+        <a href="{{route('fetch.inventory')}}" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 font-medium transition-colors">
           <span class="material-symbols-outlined text-lg">inventory_2</span>
           <span>Inventory Vault</span>
         </a>
@@ -52,6 +56,15 @@
           <span class="material-symbols-outlined text-lg">bar_chart</span>
           <span>Reports &amp; Analytics</span>
         </a>
+       <a href="{{route('admin.services')}}"
+            class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 font-medium transition-colors">
+            <span class="material-symbols-outlined text-lg">spa</span>
+            <span >Services</span>
+          </a>
+        <a href="{{route('admin.feedback')}}" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 font-medium transition-colors">
+          <span class="material-symbols-outlined text-lg">feedback</span>
+          <span>User Feedback</span>
+        </a>
       </nav>
     </div>
     <!-- Active User -->
@@ -59,8 +72,8 @@
       <div class="flex items-center gap-3 mb-3">
         <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&amp;w=150&amp;auto=format&amp;fit=crop" class="w-10 h-10 rounded-full border border-secondary object-cover" alt="Active User">
         <div class="min-w-0 flex-grow">
-          <div class="font-bold text-sm truncate text-white">Clarissa Gold</div>
-          <div class="text-xs text-white/60 truncate">Salon Admin</div>
+          <div class="font-bold text-sm truncate text-white">{{ Auth::check() ? Auth::user()->name : 'User' }}</div>
+          <div class="text-xs text-white/60 truncate">{{ Auth::check() ? ucfirst(Auth::user()->role) : 'Role' }}</div>
         </div>
       </div>
     </div>
@@ -79,7 +92,10 @@
           <span class="h-2 w-2 rounded-full bg-secondary"></span>
           <span>Admin Access</span>
         </div>
-        <a href="{{route('login')}}" class="text-xs text-white/70 hover:text-secondary font-bold flex items-center gap-1.5 transition-colors">
+        <form method="POST" action="{{ route('logout') }}" id="logout-form" style="display: none;">
+            @csrf
+        </form>
+        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="text-xs text-white/70 hover:text-secondary font-bold flex items-center gap-1.5 transition-colors">
           <span class="material-symbols-outlined text-sm">logout</span>
           <span>Exit Console</span>
         </a>

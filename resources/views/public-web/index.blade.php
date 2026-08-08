@@ -14,7 +14,7 @@
   <script src="{{ asset('script.js') }}"></script>
 </head>
 <body>
-  <!-- ═══════════════════ MOBILE MENU ═══════════════════ -->
+<!-- ═══════════════════ MOBILE MENU ═══════════════════ -->
   <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigation Menu">
     <button class="mobile-close" id="mobileClose" aria-label="Close Menu"><i class="fas fa-times"></i></button>
     <a href="#" onclick="closeMobileMenu()">Home</a>
@@ -22,8 +22,31 @@
     <a href="#gallery" onclick="closeMobileMenu()">Gallery</a>
     <a href="#stylists" onclick="closeMobileMenu()">Our Stylists</a>
     <a href="#feedback-section" onclick="closeMobileMenu()">Contact Us</a>
-    <a href="{{route('login')}}" onclick="closeMobileMenu()" class="mobile-menu-portal-link">Staff Portal</a>
+
+    {{-- Guest View --}}
+    @guest
+      <a href="{{ route('login') }}" onclick="closeMobileMenu()" class="mobile-menu-portal-link">Staff Portal</a>
+    @endguest
+
+    {{-- Authenticated View --}}
+    @auth
+      @if(Auth::user()->role === 'admin')
+        <a href="{{ route('admin.dashboard') }}" onclick="closeMobileMenu()" class="mobile-menu-portal-link">Admin Dashboard</a>
+      @elseif(Auth::user()->role === 'receptionist')
+        <a href="{{ route('receptionist.dashboard') }}" onclick="closeMobileMenu()" class="mobile-menu-portal-link">Receptionist Dashboard</a>
+      @elseif(Auth::user()->role === 'stylist')
+        <a href="{{ route('stylist.dashboard') }}" onclick="closeMobileMenu()" class="mobile-menu-portal-link">Stylist Dashboard</a>
+      @endif
+
+      <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+        @csrf
+        <button type="submit" onclick="closeMobileMenu()" class="mobile-menu-portal-link" style="background: none; border: none; width: 100%; text-align: left; cursor: pointer;">
+          Logout
+        </button>
+      </form>
+    @endauth
   </div>
+
   <!-- ═══════════════════ NAVBAR ═══════════════════ -->
   <header id="main-nav" role="banner">
     <div class="nav-inner">
@@ -40,10 +63,41 @@
           <li><a href="#feedback-section" id="nav-contact">Contact</a></li>
         </ul>
       </nav>
-      <div class="nav-cta">
-        <a href="{{route('login')}}" class="btn-nav-portal" id="staffPortalBtn">
-          <i class="fas fa-user-circle staff-portal-icon"></i>Staff Portal
-        </a>
+
+      <div class="nav-cta" style="display: flex; align-items: center; gap: 10px;">
+        {{-- Guest CTA --}}
+        @guest
+          <a href="{{ route('login') }}" class="btn-nav-portal" id="staffPortalBtn">
+            <i class="fas fa-user-circle staff-portal-icon"></i>Login
+          </a>
+        @endguest
+
+        {{-- Authenticated CTA --}}
+        @auth
+          {{-- Dynamic Dashboard Route --}}
+          @if(Auth::user()->role === 'admin')
+            <a href="{{ route('admin.dashboard') }}" class="btn-nav-portal">
+              Admin Dashboard
+            </a>
+          @elseif(Auth::user()->role === 'receptionist')
+            <a href="{{ route('receptionist.dashboard') }}" class="btn-nav-portal">
+              Receptionist Dashboard
+            </a>
+          @elseif(Auth::user()->role === 'stylist')
+            <a href="{{ route('stylist.dashboard') }}" class="btn-nav-portal">
+              Stylist Dashboard
+            </a>
+          @endif
+
+          {{-- Logout Button --}}
+          <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
+            @csrf
+            <button type="submit" class="btn-nav-portal" class="btn-nav-portal">
+              <i class="fas fa-sign-out-alt staff-portal-icon"></i>Logout
+            </button>
+          </form>
+        @endauth
+
         <button class="nav-hamburger" id="hamburgerBtn" aria-label="Open Mobile Menu" aria-expanded="false" aria-controls="mobileMenu">
           <span></span><span></span><span></span>
         </button>
@@ -87,38 +141,38 @@
           <div class="glass-card">
             <div class="card-icon"><i class="fas fa-calendar-alt"></i></div>
             <div class="card-label">Today's Appointments</div>
-            <div class="card-value">24</div>
-            <div class="card-sub">↑ 3 since yesterday</div>
+            <div class="card-value">{{ $todayAppointments }}</div>
+            <div class="card-sub">Active bookings</div>
           </div>
           <!-- Card 2 -->
           <div class="glass-card">
             <div class="card-icon"><i class="fas fa-cut"></i></div>
             <div class="card-label">Active Stylists</div>
-            <div class="card-value">8</div>
+            <div class="card-value">{{ $activeStylists }}</div>
             <div class="card-sub">All available today</div>
           </div>
           <!-- Card 3 -->
           <div class="glass-card">
             <div class="card-icon"><i class="fas fa-users"></i></div>
             <div class="card-label">Monthly Clients</div>
-            <div class="card-value">186</div>
-            <div class="card-sub">+12% this month</div>
+            <div class="card-value">{{ $monthlyClients }}</div>
+            <div class="card-sub">Unique this month</div>
           </div>
           <!-- Card 4 -->
           <div class="glass-card">
             <div class="card-icon"><i class="fas fa-dollar-sign"></i></div>
             <div class="card-label">Revenue Today</div>
-            <div class="card-value">$1,250</div>
-            <div class="card-sub">Goal: $2,000</div>
+            <div class="card-value">${{ number_format($revenueToday, 2) }}</div>
+            <div class="card-sub">Real-time update</div>
           </div>
           <!-- Card 5 – Full width: satisfaction -->
           <div class="glass-card span-2">
             <div class="card-icon"><i class="fas fa-star"></i></div>
             <div class="sat-bar-wrap">
               <div class="card-label">Customer Satisfaction</div>
-              <div class="card-value" style="font-size:1.7rem">98%</div>
+              <div class="card-value" style="font-size:1.7rem">{{ $satisfactionPercentage }}%</div>
               <div class="sat-bar-track">
-                <div class="sat-bar-fill" id="satBar"></div>
+                <div class="sat-bar-fill" id="satBar"  {{ $satisfactionPercentage }}%"></div>
               </div>
             </div>
           </div>
@@ -155,7 +209,7 @@
       </div>
     </div>
     <!-- ═══════════════════ SERVICES ═══════════════════ -->
-    <section class="services-section" id="services" aria-label="Services">
+      <section class="services-section" id="services" aria-label="Services">
       <div class="container">
         <div class="services-header reveal">
           <div>
@@ -244,42 +298,18 @@
           </p>
         </div>
         <div class="stylists-grid">
-          <div class="stylist-card reveal reveal-delay-1">
-            <div class="stylist-avatar">
-              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&amp;w=300&amp;auto=format&amp;fit=crop" alt="Clarissa Gold – Master Stylist" loading="lazy">
+          @forelse($stylists as $index => $stylist)
+            <div class="stylist-card reveal reveal-delay-{{ min($index + 1, 4) }}">
+              <div class="stylist-avatar">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&amp;w=300&amp;auto=format&amp;fit=crop" alt="{{ $stylist->full_name }} – {{ $stylist->role }}" loading="lazy">
+              </div>
+              <div class="stylist-name">{{ $stylist->full_name }}</div>
+              <span class="stylist-role">{{ ucfirst($stylist->role) }}</span>
+              <p class="stylist-bio">{{ $stylist->bio ?? 'Expert stylist dedicated to matching your vision with precision and passion.' }}</p>
             </div>
-            <div class="stylist-name">Clarissa Gold</div>
-            <span class="stylist-role">Master Stylist</span>
-            <p class="stylist-bio">Over 12 years crafting award-winning cuts, bespoke colour palettes, and signature
-              balayage finishes.</p>
-          </div>
-          <div class="stylist-card reveal reveal-delay-2">
-            <div class="stylist-avatar">
-              <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?q=80&amp;w=300&amp;auto=format&amp;fit=crop" alt="Mia Rose – Nail Artist" loading="lazy">
-            </div>
-            <div class="stylist-name">Mia Rose</div>
-            <span class="stylist-role">Nail Artist &amp; Esthetician</span>
-            <p class="stylist-bio">Specializes in custom gel nail designs and luxurious reflexology spa pedicure
-              treatments.</p>
-          </div>
-          <div class="stylist-card reveal reveal-delay-3">
-            <div class="stylist-avatar">
-              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&amp;w=300&amp;auto=format&amp;fit=crop" alt="Dr. Helen S. – Skin Specialist" loading="lazy">
-            </div>
-            <div class="stylist-name">Dr. Helen S.</div>
-            <span class="stylist-role">Senior Skin Specialist</span>
-            <p class="stylist-bio">Clinical dermatologist conducting Hydrafacial, chemical resurfacing, and
-              micro-needling protocols.</p>
-          </div>
-          <div class="stylist-card reveal reveal-delay-4">
-            <div class="stylist-avatar">
-              <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&amp;w=300&amp;auto=format&amp;fit=crop" alt="Victoria Lux – Makeup Artist" loading="lazy">
-            </div>
-            <div class="stylist-name">Victoria Lux</div>
-            <span class="stylist-role">Makeup Artist</span>
-            <p class="stylist-bio">Renowned for high-fashion editorial makeup and flawless custom bridal
-              transformations.</p>
-          </div>
+          @empty
+            <p>No stylists found.</p>
+          @endforelse
         </div>
       </div>
     </section>
@@ -363,21 +393,22 @@
             <h3>Website Feedback<br>&amp; User Experience</h3>
             <p>We value your experience. Please share your feedback about our website, report any bugs, usability
               issues, or suggest improvements to help us provide a better online experience.</p>
-            <form id="contactForm" novalidate="">
+            <form id="contactForm" action="{{ route('feedback.store') }}" method="POST">
+              @csrf
               <div class="form-row">
                 <div class="form-group">
                   <label class="form-label" for="contactName">Full Name</label>
-                  <input class="form-input" id="contactName" type="text" placeholder="Enter your full name" required="">
+                  <input class="form-input" id="contactName" name="name" type="text" placeholder="Enter your full name" required="">
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="contactEmail">Email Address</label>
-                  <input class="form-input" id="contactEmail" type="email" placeholder="Enter your email address" required="">
+                  <input class="form-input" id="contactEmail" name="email" type="email" placeholder="Enter your email address" required="">
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group">
                   <label class="form-label" for="contactService">Which page did you experience an issue on?</label>
-                  <select class="form-select" id="contactService">
+                  <select class="form-select" id="contactService" name="page">
                     <option value="Home">Home</option>
                     <option value="About">About</option>
                     <option value="Services">Services</option>
@@ -396,12 +427,12 @@
                     <i class="fas fa-star" data-rating="4"></i>
                     <i class="fas fa-star" data-rating="5"></i>
                   </div>
-                  <input type="hidden" id="contactRating" value="5">
+                  <input type="hidden" id="contactRating" name="rating" value="5">
                 </div>
               </div>
               <div class="form-group">
                 <label class="form-label" for="contactMessage">Feedback / Bug Report</label>
-                <textarea class="form-textarea" id="contactMessage" rows="4" placeholder="Tell us about your experience, report a bug, suggest improvements, or let us know if something isn't working correctly." required=""></textarea>
+                <textarea class="form-textarea" id="contactMessage" name="message" rows="4" placeholder="Tell us about your experience, report a bug, suggest improvements, or let us know if something isn't working correctly." required=""></textarea>
               </div>
               <button class="btn-submit" type="submit" id="submitInquiryBtn">
                 <i class="fas fa-paper-plane"></i> Send Feedback

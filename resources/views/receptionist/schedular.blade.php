@@ -81,34 +81,12 @@
           <div class="flex bg-gray-50 border-b border-gray-200">
             <div class="w-16 shrink-0 border-r border-gray-200"></div>
             <div class="flex-grow grid grid-cols-7 divide-x divide-gray-200">
-              <div class="p-3 text-center">
-                <div class="text-[10px] font-bold uppercase text-gray-500">Mon</div>
-                <div class="text-lg font-serif font-bold text-primary">13</div>
-              </div>
-              <div class="p-3 text-center bg-secondary/10 border-b-2 border-b-secondary">
-                <div class="text-[10px] font-bold uppercase text-secondary">Tue</div>
-                <div class="text-lg font-serif font-bold text-primary">14</div>
-              </div>
-              <div class="p-3 text-center">
-                <div class="text-[10px] font-bold uppercase text-gray-500">Wed</div>
-                <div class="text-lg font-serif font-bold text-primary">15</div>
-              </div>
-              <div class="p-3 text-center">
-                <div class="text-[10px] font-bold uppercase text-gray-500">Thu</div>
-                <div class="text-lg font-serif font-bold text-primary">16</div>
-              </div>
-              <div class="p-3 text-center">
-                <div class="text-[10px] font-bold uppercase text-gray-500">Fri</div>
-                <div class="text-lg font-serif font-bold text-primary">17</div>
-              </div>
-              <div class="p-3 text-center">
-                <div class="text-[10px] font-bold uppercase text-gray-500">Sat</div>
-                <div class="text-lg font-serif font-bold text-primary">18</div>
-              </div>
-              <div class="p-3 text-center bg-gray-100">
-                <div class="text-[10px] font-bold uppercase text-gray-400">Sun</div>
-                <div class="text-lg font-serif font-bold text-gray-400">19</div>
-              </div>
+              @foreach($weekDays as $day)
+                <div class="p-3 text-center {{ $day['is_today'] ? 'bg-secondary/10 border-b-2 border-b-secondary' : '' }}">
+                  <div class="text-[10px] font-bold uppercase {{ $day['is_today'] ? 'text-secondary' : 'text-gray-500' }}">{{ $day['name'] }}</div>
+                  <div class="text-lg font-serif font-bold text-primary">{{ $day['date_num'] }}</div>
+                </div>
+              @endforeach
             </div>
           </div>
           <!-- Grid Body (Hours & Appointments) -->
@@ -116,66 +94,32 @@
             <div class="flex relative min-h-[800px]">
               <!-- Time Column -->
               <div class="w-16 shrink-0 border-r border-gray-200 flex flex-col divide-y divide-gray-100 text-[10px] text-gray-400 font-bold text-center">
-                <div class="h-20 flex items-start justify-center pt-2">9:00 AM</div>
-                <div class="h-20 flex items-start justify-center pt-2">10:00 AM</div>
-                <div class="h-20 flex items-start justify-center pt-2">11:00 AM</div>
-                <div class="h-20 flex items-start justify-center pt-2">12:00 PM</div>
-                <div class="h-20 flex items-start justify-center pt-2">1:00 PM</div>
-                <div class="h-20 flex items-start justify-center pt-2">2:00 PM</div>
-                <div class="h-20 flex items-start justify-center pt-2">3:00 PM</div>
-                <div class="h-20 flex items-start justify-center pt-2">4:00 PM</div>
-                <div class="h-20 flex items-start justify-center pt-2">5:00 PM</div>
-                <div class="h-20 flex items-start justify-center pt-2">6:00 PM</div>
+                @for($h = 9; $h <= 18; $h++)
+                  <div class="h-20 flex items-start justify-center pt-2">{{ date('g:i A', strtotime("$h:00")) }}</div>
+                @endfor
               </div>
               <!-- Days Columns (Background grid) -->
               <div class="flex-grow grid grid-cols-7 divide-x divide-gray-100 absolute inset-0 left-16 z-0">
-                <div class="flex flex-col divide-y divide-gray-50"><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div></div>
-                <div class="flex flex-col divide-y divide-gray-50 bg-secondary/5"><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div></div>
-                <div class="flex flex-col divide-y divide-gray-50"><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div></div>
-                <div class="flex flex-col divide-y divide-gray-50"><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div></div>
-                <div class="flex flex-col divide-y divide-gray-50"><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div></div>
-                <div class="flex flex-col divide-y divide-gray-50"><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div></div>
-                <div class="flex flex-col divide-y divide-gray-50 bg-gray-50"><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div><div class="h-20"></div></div>
+                @foreach($weekDays as $day)
+                  <div class="flex flex-col divide-y divide-gray-50 {{ $day['is_today'] ? 'bg-secondary/5' : '' }}">
+                    @for($h = 9; $h <= 18; $h++)
+                      <div class="h-20"></div>
+                    @endfor
+                  </div>
+                @endforeach
               </div>
-              <!-- Static Pre-rendered Appointment Blocks (z-10) -->
-              <!-- Each column is ~14.28%. Top is hours * 80px -->
+              <!-- Dynamic Rendered Appointment Blocks (z-10) -->
               <div class="absolute inset-0 left-16 z-10 pointer-events-none">
-                <!-- Monday 10am-11:30am (Top: 80px, Height: 120px) -->
-                <div class="absolute w-[calc(14.28%-8px)] left-[4px] top-[80px] h-[120px] bg-emerald-50 border-primary apt-block rounded-r p-2 pointer-events-auto">
-                  <div class="text-[10px] font-bold text-primary">10:00 AM - 11:30 AM</div>
-                  <div class="text-xs font-bold text-gray-800">Isabella Swan</div>
-                  <div class="text-[10px] text-gray-500 truncate">Balayage (Clarissa)</div>
-                </div>
-                <!-- Tuesday (Today) 11am-12pm -->
-                <div class="absolute w-[calc(14.28%-8px)] left-[calc(14.28%+4px)] top-[160px] h-[80px] bg-amber-50 border-secondary apt-block rounded-r p-2 pointer-events-auto">
-                  <div class="text-[10px] font-bold text-secondary">11:00 AM - 12:00 PM</div>
-                  <div class="text-xs font-bold text-gray-800">Maria Garcia</div>
-                  <div class="text-[10px] text-gray-500 truncate">Hydration Facial (Helen)</div>
-                </div>
-                <!-- Tuesday (Today) 1pm-2:30pm -->
-                <div class="absolute w-[calc(14.28%-8px)] left-[calc(14.28%+4px)] top-[320px] h-[120px] bg-blue-50 border-blue-500 apt-block rounded-r p-2 pointer-events-auto">
-                  <div class="text-[10px] font-bold text-blue-600">1:00 PM - 2:30 PM</div>
-                  <div class="text-xs font-bold text-gray-800">Chloe Jensen</div>
-                  <div class="text-[10px] text-gray-500 truncate">Gel Mani/Pedi (Mia)</div>
-                </div>
-                <!-- Wednesday 2pm-3pm -->
-                <div class="absolute w-[calc(14.28%-8px)] left-[calc(28.56%+4px)] top-[400px] h-[80px] bg-purple-50 border-purple-500 apt-block rounded-r p-2 pointer-events-auto">
-                  <div class="text-[10px] font-bold text-purple-600">2:00 PM - 3:00 PM</div>
-                  <div class="text-xs font-bold text-gray-800">Emily Blunt</div>
-                  <div class="text-[10px] text-gray-500 truncate">Bridal Trial (Victoria)</div>
-                </div>
-                <!-- Thursday 9am-10:30am -->
-                <div class="absolute w-[calc(14.28%-8px)] left-[calc(42.84%+4px)] top-[0px] h-[120px] bg-emerald-50 border-primary apt-block rounded-r p-2 pointer-events-auto">
-                  <div class="text-[10px] font-bold text-primary">9:00 AM - 10:30 AM</div>
-                  <div class="text-xs font-bold text-gray-800">Sophia Loren</div>
-                  <div class="text-[10px] text-gray-500 truncate">Color Retouch (Clarissa)</div>
-                </div>
-                <!-- Friday 4pm-5pm -->
-                <div class="absolute w-[calc(14.28%-8px)] left-[calc(57.12%+4px)] top-[560px] h-[80px] bg-amber-50 border-secondary apt-block rounded-r p-2 pointer-events-auto">
-                  <div class="text-[10px] font-bold text-secondary">4:00 PM - 5:00 PM</div>
-                  <div class="text-xs font-bold text-gray-800">Natalie Portman</div>
-                  <div class="text-[10px] text-gray-500 truncate">Dermaplaning (Helen)</div>
-                </div>
+                @foreach($gridAppointments as $apt)
+                  <div 
+                    class="absolute w-[calc(14.28%-8px)] bg-emerald-50 border-l-4 border-primary shadow-md rounded-r p-2 pointer-events-auto hover:bg-emerald-100 transition-colors"
+                    style="left: calc({{ $apt['day_index'] * 14.28 }}% + 4px); top: {{ $apt['top_px'] }}px; height: {{ $apt['height_px'] }}px;"
+                  >
+                    <div class="text-[10px] font-bold text-primary">{{ $apt['time_formatted'] }}</div>
+                    <div class="text-xs font-bold text-gray-800 truncate">{{ $apt['client_name'] }}</div>
+                    <div class="text-[10px] text-gray-500 truncate">{{ $apt['service_name'] }} ({{ $apt['stylist_name'] }})</div>
+                  </div>
+                @endforeach
               </div>
               <!-- Current Time Line Indicator (e.g. Tuesday 11:30 AM) -->
               <div class="absolute left-16 right-0 top-[200px] z-20 flex items-center pointer-events-none">
@@ -205,12 +149,11 @@
             <div>
               <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Select Client</label>
               <div class="relative">
-                <select class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary appearance-none cursor-pointer">
-                  <option value="" disabled="" selected="">Search directory...</option>
-                  <option>Isabella Swan</option>
-                  <option>Maria Garcia</option>
-                  <option>Chloe Jensen</option>
-                  <option>+ Add New Client</option>
+                <select name="client_id" class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary appearance-none cursor-pointer" required>
+                  <option value="" disabled selected>Select Client</option>
+                  @foreach($clients as $client)
+                    <option value="{{ $client->id }}">{{ $client->name ?? $client->full_name }}</option>
+                  @endforeach
                 </select>
                 <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400"><i class="fas fa-chevron-down text-xs"></i></div>
               </div>
@@ -219,39 +162,43 @@
             <div>
               <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Assigned Stylist</label>
               <div class="relative">
-                <select class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary appearance-none cursor-pointer">
-                  <option>Clarissa Gold (Hair)</option>
-                  <option>Dr. Helen (Skin)</option>
-                  <option>Mia Valentina (Nails)</option>
-                  <option>Victoria (Makeup)</option>
+                <select name="stylist_id" class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary appearance-none cursor-pointer" required>
+                  <option value="" disabled selected>Select Stylist</option>
+                  @foreach($staff as $stf)
+                    @if($stf->role === 'stylist')
+                      <option value="{{ $stf->id }}">{{ $stf->full_name }}</option>
+                    @endif
+                  @endforeach
                 </select>
                 <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400"><i class="fas fa-chevron-down text-xs"></i></div>
               </div>
             </div>
           </div>
           <!-- Service Selection -->
-          <div>
-            <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Service Requested</label>
-            <div class="relative">
-              <select class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary appearance-none cursor-pointer">
-                <option>Balayage Color &amp; Cut ($250)</option>
-                <option>Hydration Facial ($150)</option>
-                <option>Gel Manicure &amp; Pedicure ($120)</option>
-                <option>Bridal Makeup Trial ($180)</option>
-              </select>
-              <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400"><i class="fas fa-chevron-down text-xs"></i></div>
-            </div>
-          </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            @for ($i = 1; $i <= 3; $i++)
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Service Requested {{ $i }} {{ $i > 1 ? '(Optional)' : '' }}</label>
+              <div class="relative">
+                <select name="service_id_{{ $i }}" class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary appearance-none cursor-pointer" {{ $i === 1 ? 'required' : '' }}>
+                  <option value="" selected>Select Service {{ $i }}</option>
+                  @foreach($services as $service)
+                    <option value="{{ $service->id }}">{{ $service->name }} (${{ number_format($service->price ?? $service->total_price ?? 0, 2) }})</option>
+                  @endforeach
+                </select>
+                <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none text-gray-400"><i class="fas fa-chevron-down text-xs"></i></div>
+              </div>
+            </div>
+            @endfor
             <!-- Date Picker -->
             <div>
               <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Date</label>
-              <input type="date" class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary text-gray-700" value="2026-07-15">
+              <input type="date" name="appointment_date" class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary text-gray-700" value="{{ date('Y-m-d') }}" required>
             </div>
             <!-- Time Picker -->
             <div>
               <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Time Slot</label>
-              <input type="time" class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary text-gray-700" value="10:00">
+              <input type="time" name="appointment_time" class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary text-gray-700" value="10:00" required>
             </div>
           </div>
           <!-- Checkbox -->

@@ -28,7 +28,7 @@
           <span class="material-symbols-outlined text-lg">dashboard</span>
           <span>My Workspace</span>
         </a>
-        <a href="{{ route('login') }}" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 font-medium transition-colors">
+        <a href="{{ route('home') }}" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 font-medium transition-colors">
           <span class="material-symbols-outlined text-lg">logout</span>
           <span>Log Out</span>
         </a>
@@ -37,10 +37,10 @@
     <!-- Active User (Stylist) -->
     <div class="p-4 border-t border-white/10 bg-black/20">
       <div class="flex items-center gap-3 mb-3">
-        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&amp;w=150&amp;auto=format&amp;fit=crop" class="w-10 h-10 rounded-full border border-secondary object-cover" alt="Active Stylist">
+        <img src="{{ asset($stylist->profile_image ?? 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&amp;w=150&amp;auto=format&amp;fit=crop') }}" class="w-10 h-10 rounded-full border border-secondary object-cover" alt="Active Stylist">
         <div class="min-w-0 flex-grow">
-          <div class="font-bold text-sm truncate text-white">Marcus Vance</div>
-          <div class="text-xs text-white/60 truncate">Senior Stylist</div>
+          <div class="font-bold text-sm truncate text-white">{{ $stylist->full_name ?? 'Marcus Vance' }}</div>
+          <div class="text-xs text-white/60 truncate">{{ $stylist->role ?? 'Senior Stylist' }}</div>
         </div>
       </div>
     </div>
@@ -71,10 +71,10 @@
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h2 class="font-serif text-3xl font-bold text-primary">Stylist Workspace</h2>
-          <p class="text-sm text-gray-500">Welcome back, Marcus. Review your daily schedule and commissions.</p>
+          <p class="text-sm text-gray-500">Welcome back, {{ explode(' ', $stylist->full_name)[0] ?? 'Marcus' }}. Review your daily schedule and commissions.</p>
         </div>
         <div class="bg-white border border-secondary/30 rounded-xl px-4 py-2 shadow-sm text-xs font-bold text-gray-600">
-          Today: July 15, 2026
+          Today: {{ \Carbon\Carbon::now()->format('F j, Y') }}
         </div>
       </div>
       <!-- Notification Alert Banner -->
@@ -91,19 +91,19 @@
         <div class="bg-white border border-secondary/20 rounded-2xl p-6 shadow-md flex items-center justify-between">
           <div class="space-y-1">
             <span class="text-xs uppercase tracking-wider text-gray-500 font-bold">My Assigned Shift</span>
-            <h3 class="text-base font-bold text-primary font-sans leading-tight mt-1">Mon, Tue, Thu, Fri</h3>
-            <span class="text-xs text-gray-500 font-semibold block">9:00 AM - 6:00 PM</span>
+            <h3 class="text-base font-bold text-primary font-sans leading-tight mt-1">{{ $stylist->shift_days ?? 'Flexible' }}</h3>
+            <span class="text-xs text-gray-500 font-semibold block">{{ $stylist->shift_timing ?? '9:00 AM - 6:00 PM' }}</span>
           </div>
           <div class="w-12 h-12 rounded-xl bg-background border border-secondary/30 flex items-center justify-center text-secondary text-xl">
             <span class="material-symbols-outlined">schedule</span>
           </div>
         </div>
-        <!-- Today's Appointments -->
+        <!-- All Appointments -->
         <div class="bg-white border border-secondary/20 rounded-2xl p-6 shadow-md flex items-center justify-between">
           <div class="space-y-1">
-            <span class="text-xs uppercase tracking-wider text-gray-500 font-bold">Appointments Today</span>
-            <h3 class="text-2xl font-bold text-primary font-sans">5 Scheduled</h3>
-            <span class="text-xs text-gray-400 font-semibold truncate block">For Marcus Vance</span>
+            <span class="text-xs uppercase tracking-wider text-gray-500 font-bold">Total Scheduled</span>
+            <h3 class="text-2xl font-bold text-primary font-sans">{{ $appointments->count() }} Scheduled</h3>
+            <span class="text-xs text-gray-400 font-semibold truncate block">For {{ $stylist->full_name ?? 'Marcus Vance' }}</span>
           </div>
           <div class="w-12 h-12 rounded-xl bg-background border border-secondary/30 flex items-center justify-center text-secondary text-xl">
             <span class="material-symbols-outlined">event_available</span>
@@ -113,7 +113,7 @@
         <div class="bg-white border border-secondary/20 rounded-2xl p-6 shadow-md flex items-center justify-between">
           <div class="space-y-1">
             <span class="text-xs uppercase tracking-wider text-gray-500 font-bold">My Commission Rate</span>
-            <h3 class="text-2xl font-bold text-primary font-sans">15%</h3>
+            <h3 class="text-2xl font-bold text-primary font-sans">{{ $stylist->commission_rate ?? 0 }}%</h3>
             <span class="text-xs text-secondary font-semibold flex items-center gap-1">
               <i class="fas fa-percent text-[10px]"></i> Standard Tier
             </span>
@@ -123,10 +123,10 @@
           </div>
         </div>
       </div>
-      <!-- My Scheduled Appointments for Today -->
+      <!-- My Scheduled Appointments -->
       <div class="bg-white border border-secondary/20 rounded-2xl shadow-lg overflow-hidden">
         <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
-          <h4 class="font-serif text-lg font-bold text-primary">My Scheduled Appointments</h4>
+          <h4 class="font-serif text-lg font-bold text-primary">All Scheduled Appointments</h4>
           <span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider font-sans">Assigned Schedule</span>
         </div>
         <div class="overflow-x-auto">
@@ -140,33 +140,20 @@
               </tr>
             </thead>
             <tbody class="text-sm divide-y divide-gray-100 font-sans">
-              <!-- Row 1 -->
-              <tr class="hover:bg-gray-50/50">
-                <td class="p-5 font-bold text-primary">Jessica Miller</td>
-                <td class="p-5 text-gray-600">Couture Styling &amp; Cut</td>
-                <td class="p-5 text-gray-600 font-mono">10:00 AM</td>
-                <td class="p-5">
-                  <span class="inline-block px-2.5 py-1 bg-green-50 text-primary text-[10px] font-bold rounded-full border border-green-200">Scheduled</span>
-                </td>
-              </tr>
-              <!-- Row 2 -->
-              <tr class="hover:bg-gray-50/50">
-                <td class="p-5 font-bold text-primary">Emma Watson</td>
-                <td class="p-5 text-gray-600">Signature Gel Manicure</td>
-                <td class="p-5 text-gray-600 font-mono">01:30 PM</td>
-                <td class="p-5">
-                  <span class="inline-block px-2.5 py-1 bg-green-50 text-primary text-[10px] font-bold rounded-full border border-green-200">Scheduled</span>
-                </td>
-              </tr>
-              <!-- Row 3 -->
-              <tr class="hover:bg-gray-50/50">
-                <td class="p-5 font-bold text-primary">Sarah Khan</td>
-                <td class="p-5 text-gray-600">Hydrafacial Pro Treatment</td>
-                <td class="p-5 text-gray-600 font-mono">04:00 PM</td>
-                <td class="p-5">
-                  <span class="inline-block px-2.5 py-1 bg-green-50 text-primary text-[10px] font-bold rounded-full border border-green-200">Scheduled</span>
-                </td>
-              </tr>
+              @forelse($appointments as $apt)
+                <tr class="hover:bg-gray-50/50">
+                  <td class="p-5 font-bold text-primary">{{ $apt->client->name ?? $apt->client->full_name ?? 'N/A' }}</td>
+                  <td class="p-5 text-gray-600">{{ $apt->service1->name ?? 'General Service' }}</td>
+                  <td class="p-5 text-gray-600 font-mono">{{ $apt->appointment_time ?? $apt->time_slot ?? 'N/A' }}</td>
+                  <td class="p-5">
+                    <span class="inline-block px-2.5 py-1 bg-green-50 text-primary text-[10px] font-bold rounded-full border border-green-200">{{ ucfirst($apt->status ?? 'Scheduled') }}</span>
+                  </td>
+                </tr>
+              @empty
+                <tr>
+                  <td colspan="4" class="p-5 text-center text-gray-500">No upcoming appointments scheduled.</td>
+                </tr>
+              @endforelse
             </tbody>
           </table>
         </div>
@@ -177,12 +164,12 @@
         <div class="grid grid-cols-2 gap-6 divide-x divide-gray-100">
           <div>
             <span class="text-xs uppercase tracking-wider text-gray-500 font-bold block mb-1">Today's Estimated Payout</span>
-            <span class="text-2xl font-bold text-primary font-mono">$40.50</span>
+            <span class="text-2xl font-bold text-primary font-mono">${{ number_format($todayCommission, 2) }}</span>
             <span class="text-[10px] text-gray-400 block mt-1">Based on completed services</span>
           </div>
           <div class="pl-6">
             <span class="text-xs uppercase tracking-wider text-gray-500 font-bold block mb-1">This Week's Commission</span>
-            <span class="text-2xl font-bold text-secondary-dark font-mono">$280.00</span>
+            <span class="text-2xl font-bold text-secondary-dark font-mono">${{ number_format($weekCommission, 2) }}</span>
             <span class="text-[10px] text-gray-400 block mt-1">Cumulative weekly total</span>
           </div>
         </div>

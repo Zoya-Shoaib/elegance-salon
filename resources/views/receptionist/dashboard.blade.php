@@ -59,36 +59,21 @@
               </tr>
             </thead>
             <tbody class="text-sm divide-y divide-gray-100 font-sans">
-              <!-- Row 1 -->
-              <tr class="hover:bg-gray-50/50">
-                <td class="p-5 font-bold text-primary">Jessica Miller</td>
-                <td class="p-5 text-gray-600">Marcus</td>
-                <td class="p-5 text-gray-600">Hair styling</td>
-                <td class="p-5 text-gray-600 font-mono">10:00 AM</td>
-                <td class="p-5">
-                  <span class="inline-block px-2.5 py-1 bg-green-50 text-primary text-[10px] font-bold rounded-full border border-green-200">Scheduled</span>
-                </td>
-              </tr>
-              <!-- Row 2 -->
-              <tr class="hover:bg-gray-50/50">
-                <td class="p-5 font-bold text-primary">Sarah Khan</td>
-                <td class="p-5 text-gray-600">David</td>
-                <td class="p-5 text-gray-600">Hydrafacial</td>
-                <td class="p-5 text-gray-600 font-mono">11:30 AM</td>
-                <td class="p-5">
-                  <span class="inline-block px-2.5 py-1 bg-green-50 text-primary text-[10px] font-bold rounded-full border border-green-200">Scheduled</span>
-                </td>
-              </tr>
-              <!-- Row 3 -->
-              <tr class="hover:bg-gray-50/50">
-                <td class="p-5 font-bold text-primary">Emma Watson</td>
-                <td class="p-5 text-gray-600">Sophia</td>
-                <td class="p-5 text-gray-600">Manicure</td>
-                <td class="p-5 text-gray-600 font-mono">02:00 PM</td>
-                <td class="p-5">
-                  <span class="inline-block px-2.5 py-1 bg-green-50 text-primary text-[10px] font-bold rounded-full border border-green-200">Scheduled</span>
-                </td>
-              </tr>
+              @forelse($todayAppointments as $apt)
+                <tr class="hover:bg-gray-50/50">
+                  <td class="p-5 font-bold text-primary">{{ $apt->client->name ?? $apt->client->full_name ?? 'N/A' }}</td>
+                  <td class="p-5 text-gray-600">{{ $apt->stylist->name ?? $apt->stylist->full_name ?? 'N/A' }}</td>
+                  <td class="p-5 text-gray-600">{{ $apt->service1->name ?? 'General Service' }}</td>
+                  <td class="p-5 text-gray-600 font-mono">{{ $apt->appointment_time ?? $apt->time_slot ?? 'N/A' }}</td>
+                  <td class="p-5">
+                    <span class="inline-block px-2.5 py-1 bg-green-50 text-primary text-[10px] font-bold rounded-full border border-green-200">{{ ucfirst($apt->status ?? 'Scheduled') }}</span>
+                  </td>
+                </tr>
+              @empty
+                <tr>
+                  <td colspan="5" class="p-5 text-center text-gray-500">No appointments scheduled for today.</td>
+                </tr>
+              @endforelse
             </tbody>
           </table>
         </div>
@@ -99,7 +84,7 @@
         <div class="bg-white border border-secondary/20 rounded-2xl p-6 shadow-md flex items-center justify-between">
           <div class="space-y-1">
             <span class="text-xs uppercase tracking-wider text-gray-500 font-bold">Total Bookings Today</span>
-            <h3 class="text-2xl font-bold text-primary">14 Scheduled</h3>
+            <h3 class="text-2xl font-bold text-primary">{{ $totalBookings }} Scheduled</h3>
           </div>
           <div class="w-12 h-12 rounded-xl bg-background border border-secondary/30 flex items-center justify-center text-secondary text-xl">
             <span class="material-symbols-outlined">event_available</span>
@@ -109,7 +94,7 @@
         <div class="bg-white border border-secondary/20 rounded-2xl p-6 shadow-md flex items-center justify-between">
           <div class="space-y-1">
             <span class="text-xs uppercase tracking-wider text-gray-500 font-bold">Completed Bookings</span>
-            <h3 class="text-2xl font-bold text-primary">5 Completed</h3>
+            <h3 class="text-2xl font-bold text-primary">{{ $completedBookings }} Completed</h3>
           </div>
           <div class="w-12 h-12 rounded-xl bg-background border border-secondary/30 flex items-center justify-center text-secondary text-xl">
             <span class="material-symbols-outlined">task_alt</span>
@@ -119,7 +104,7 @@
         <div class="bg-white border border-secondary/20 rounded-2xl p-6 shadow-md flex items-center justify-between">
           <div class="space-y-1">
             <span class="text-xs uppercase tracking-wider text-gray-500 font-bold">Remaining Bookings</span>
-            <h3 class="text-2xl font-bold text-primary">9 Pending</h3>
+            <h3 class="text-2xl font-bold text-primary">{{ $pendingBookings }} Pending</h3>
           </div>
           <div class="w-12 h-12 rounded-xl bg-background border border-secondary/30 flex items-center justify-center text-secondary text-xl">
             <span class="material-symbols-outlined">pending_actions</span>
