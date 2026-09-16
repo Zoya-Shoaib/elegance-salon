@@ -68,8 +68,8 @@
       <div class="flex items-center gap-3 mb-3">
         <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&amp;w=150&amp;auto=format&amp;fit=crop" class="w-10 h-10 rounded-full border border-secondary object-cover" alt="Active User">
         <div class="min-w-0 flex-grow">
-          <div class="font-bold text-sm truncate text-white">Clarissa Gold</div>
-          <div class="text-xs text-white/60 truncate">Salon Admin</div>
+          <div class="font-bold text-sm truncate text-white">{{ Auth::check() ? Auth::user()->name : 'User' }}</div>
+          <div class="text-xs text-white/60 truncate">{{ Auth::check() ? ucfirst(Auth::user()->role) : 'Role' }}</div>
         </div>
       </div>
     </div>

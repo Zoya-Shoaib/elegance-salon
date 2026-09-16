@@ -12,9 +12,11 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\FeedbackController;
 
 // 1. PUBLIC ROUTES
 Route::get('/', [PublicWebsiteController::class, 'index'])->name('home');
+Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
 
 // 2. AUTHENTICATION ROUTES
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');

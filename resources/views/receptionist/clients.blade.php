@@ -43,30 +43,31 @@
               </tr>
             </thead>
             <tbody class="text-sm divide-y divide-gray-100">
-              <!-- Record 1 -->
+              @forelse($clients as $client)
               <tr class="hover:bg-gray-50/50 group">
                 <td class="p-5">
                   <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-secondary/20 border border-secondary/50 flex items-center justify-center text-secondary font-serif font-bold text-lg shrink-0">IS</div>
+                    <div class="w-10 h-10 rounded-full bg-secondary/20 border border-secondary/50 flex items-center justify-center text-secondary font-serif font-bold text-lg shrink-0">
+                      {{ substr($client->name ?? $client->full_name ?? 'C', 0, 1) }}
+                    </div>
                     <div>
-                      <div class="font-bold text-primary text-base flex items-center gap-2">Isabella Swan <span class="bg-amber-100 text-amber-800 border border-amber-200 text-[9px] px-1.5 py-0.5 rounded uppercase tracking-wider font-bold">VIP</span></div>
-                      <div class="text-xs text-gray-500">Member since 2024</div>
+                      <div class="font-bold text-primary text-base flex items-center gap-2">{{ $client->name ?? $client->full_name ?? 'Unknown Client' }}</div>
+                      <div class="text-xs text-gray-500">Member since {{ $client->created_at->format('Y') ?? 'N/A' }}</div>
                     </div>
                   </div>
                 </td>
                 <td class="p-5">
-                  <div class="text-gray-700 font-medium">isabella.swan@example.com</div>
-                  <div class="text-xs text-gray-500 font-mono mt-0.5">+1 (310) 555-0192</div>
+                  <div class="text-gray-700 font-medium">{{ $client->email ?? 'No email provided' }}</div>
+                  <div class="text-xs text-gray-500 font-mono mt-0.5">{{ $client->phone ?? 'No phone provided' }}</div>
                 </td>
                 <td class="p-5">
-                  <div class="text-gray-700 font-medium">12 Total Visits</div>
-                  <div class="text-xs text-gray-500 mt-0.5">Last: Jul 2, 2026 (Balayage)</div>
+                  <div class="text-gray-700 font-medium">-- Total Visits</div>
+                  <div class="text-xs text-gray-500 mt-0.5">--</div>
                 </td>
                 <td class="p-5">
                   <span class="inline-block px-3 py-1 bg-green-50 text-primary border border-green-200 text-[11px] font-bold rounded-full">
-                    <i class="fas fa-heart text-secondary mr-1"></i> Prefers: Clarissa (Hair)
+                    <i class="fas fa-heart text-secondary mr-1"></i> Preferences N/A
                   </span>
-                  <div class="text-xs text-gray-500 mt-1 italic">Notes: Allergic to lavender oil.</div>
                 </td>
                 <td class="p-5 text-center">
                   <div class="flex items-center justify-center gap-2">
@@ -79,115 +80,11 @@
                   </div>
                 </td>
               </tr>
-              <!-- Record 2 -->
-              <tr class="hover:bg-gray-50/50 group">
-                <td class="p-5">
-                  <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-serif font-bold text-lg shrink-0">MG</div>
-                    <div>
-                      <div class="font-bold text-primary text-base flex items-center gap-2">Maria Garcia</div>
-                      <div class="text-xs text-gray-500">Member since 2025</div>
-                    </div>
-                  </div>
-                </td>
-                <td class="p-5">
-                  <div class="text-gray-700 font-medium">m.garcia99@example.com</div>
-                  <div class="text-xs text-gray-500 font-mono mt-0.5">+1 (323) 555-8834</div>
-                </td>
-                <td class="p-5">
-                  <div class="text-gray-700 font-medium">4 Total Visits</div>
-                  <div class="text-xs text-gray-500 mt-0.5">Last: Jun 15, 2026 (Hydration Facial)</div>
-                </td>
-                <td class="p-5">
-                  <span class="inline-block px-3 py-1 bg-green-50 text-primary border border-green-200 text-[11px] font-bold rounded-full">
-                    <i class="fas fa-heart text-secondary mr-1"></i> Prefers: Dr. Helen (Skin)
-                  </span>
-                </td>
-                <td class="p-5 text-center">
-                  <div class="flex items-center justify-center gap-2">
-                    <button class="w-8 h-8 rounded-lg bg-gray-50 border border-gray-200 text-primary hover:bg-primary hover:text-white hover:border-primary transition-colors flex items-center justify-center shadow-sm">
-                      <span class="material-symbols-outlined text-sm">edit</span>
-                    </button>
-                    <button class="w-8 h-8 rounded-lg bg-gray-50 border border-gray-200 text-red-500 hover:bg-red-500 hover:text-white hover:border-red-500 transition-colors flex items-center justify-center shadow-sm">
-                      <span class="material-symbols-outlined text-sm">delete</span>
-                    </button>
-                  </div>
-                </td>
+              @empty
+              <tr>
+                <td colspan="5" class="p-5 text-center text-gray-500">No clients registered yet.</td>
               </tr>
-              <!-- Record 3 -->
-              <tr class="hover:bg-gray-50/50 group">
-                <td class="p-5">
-                  <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-serif font-bold text-lg shrink-0">CJ</div>
-                    <div>
-                      <div class="font-bold text-primary text-base flex items-center gap-2">Chloe Jensen</div>
-                      <div class="text-xs text-gray-500">Member since 2026</div>
-                    </div>
-                  </div>
-                </td>
-                <td class="p-5">
-                  <div class="text-gray-700 font-medium">chloe.j@example.com</div>
-                  <div class="text-xs text-gray-500 font-mono mt-0.5">+1 (424) 555-1022</div>
-                </td>
-                <td class="p-5">
-                  <div class="text-gray-700 font-medium">1 Total Visit</div>
-                  <div class="text-xs text-gray-500 mt-0.5">Last: May 10, 2026 (Manicure)</div>
-                </td>
-                <td class="p-5">
-                  <span class="inline-block px-3 py-1 bg-green-50 text-primary border border-green-200 text-[11px] font-bold rounded-full">
-                    <i class="fas fa-heart text-secondary mr-1"></i> Prefers: Mia (Nails)
-                  </span>
-                  <div class="text-xs text-gray-500 mt-1 italic">Notes: Likes almond shape nails.</div>
-                </td>
-                <td class="p-5 text-center">
-                  <div class="flex items-center justify-center gap-2">
-                    <button class="w-8 h-8 rounded-lg bg-gray-50 border border-gray-200 text-primary hover:bg-primary hover:text-white hover:border-primary transition-colors flex items-center justify-center shadow-sm">
-                      <span class="material-symbols-outlined text-sm">edit</span>
-                    </button>
-                    <button class="w-8 h-8 rounded-lg bg-gray-50 border border-gray-200 text-red-500 hover:bg-red-500 hover:text-white hover:border-red-500 transition-colors flex items-center justify-center shadow-sm">
-                      <span class="material-symbols-outlined text-sm">delete</span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <!-- Record 4 -->
-              <tr class="hover:bg-gray-50/50 group">
-                <td class="p-5">
-                  <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-secondary/20 border border-secondary/50 flex items-center justify-center text-secondary font-serif font-bold text-lg shrink-0">EB</div>
-                    <div>
-                      <div class="font-bold text-primary text-base flex items-center gap-2">Emily Blunt <span class="bg-amber-100 text-amber-800 border border-amber-200 text-[9px] px-1.5 py-0.5 rounded uppercase tracking-wider font-bold">VIP</span></div>
-                      <div class="text-xs text-gray-500">Member since 2023</div>
-                    </div>
-                  </div>
-                </td>
-                <td class="p-5">
-                  <div class="text-gray-700 font-medium">e.blunt.pr@example.com</div>
-                  <div class="text-xs text-gray-500 font-mono mt-0.5">+1 (310) 555-7771</div>
-                </td>
-                <td class="p-5">
-                  <div class="text-gray-700 font-medium">28 Total Visits</div>
-                  <div class="text-xs text-gray-500 mt-0.5">Last: Jul 8, 2026 (Makeup)</div>
-                </td>
-                <td class="p-5">
-                  <span class="inline-block px-3 py-1 bg-green-50 text-primary border border-green-200 text-[11px] font-bold rounded-full mb-1">
-                    <i class="fas fa-heart text-secondary mr-1"></i> Prefers: Victoria (Makeup)
-                  </span><br>
-                  <span class="inline-block px-3 py-1 bg-green-50 text-primary border border-green-200 text-[11px] font-bold rounded-full">
-                    <i class="fas fa-heart text-secondary mr-1"></i> Prefers: Clarissa (Hair)
-                  </span>
-                </td>
-                <td class="p-5 text-center">
-                  <div class="flex items-center justify-center gap-2">
-                    <button class="w-8 h-8 rounded-lg bg-gray-50 border border-gray-200 text-primary hover:bg-primary hover:text-white hover:border-primary transition-colors flex items-center justify-center shadow-sm">
-                      <span class="material-symbols-outlined text-sm">edit</span>
-                    </button>
-                    <button class="w-8 h-8 rounded-lg bg-gray-50 border border-gray-200 text-red-500 hover:bg-red-500 hover:text-white hover:border-red-500 transition-colors flex items-center justify-center shadow-sm">
-                      <span class="material-symbols-outlined text-sm">delete</span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
+              @endforelse
             </tbody>
           </table>
         </div>

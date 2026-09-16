@@ -22,94 +22,20 @@
           </div>
           <!-- Catalog Grid -->
           <div class="flex-grow overflow-y-auto scrollbar-lux pb-4 grid grid-cols-1 md:grid-cols-2 gap-5 pr-2">
-            <!-- Card 1 -->
+            @forelse($services as $service)
             <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm flex flex-col justify-between hover:border-secondary transition-colors">
               <div>
                 <div class="flex justify-between items-start gap-2 mb-1">
-                  <h4 class="font-bold text-gray-800 text-sm">Couture Styling &amp; Cut</h4>
-                  <span class="font-bold text-gray-900 font-sans text-sm shrink-0">$90.00</span>
+                  <h4 class="font-bold text-gray-800 text-sm">{{ $service->name }}</h4>
+                  <span class="font-bold text-gray-900 font-sans text-sm shrink-0">${{ number_format($service->price ?? $service->total_price ?? 0, 2) }}</span>
                 </div>
-                <p class="text-xs text-gray-500 mb-4">Wash, trim, balayage details</p>
+                <p class="text-xs text-gray-500 mb-4">{{ $service->description ?? 'Service duration: ' . ($service->duration ?? 60) . ' mins' }}</p>
               </div>
               <button class="w-full bg-secondary text-white font-bold text-xs py-2.5 rounded-lg hover:bg-secondary-dark transition-colors shadow-sm uppercase tracking-wider">ADD TO CART</button>
             </div>
-            <!-- Card 2 -->
-            <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm flex flex-col justify-between hover:border-secondary transition-colors">
-              <div>
-                <div class="flex justify-between items-start gap-2 mb-1">
-                  <h4 class="font-bold text-gray-800 text-sm">Bespoke Balayage &amp; Gl...</h4>
-                  <span class="font-bold text-gray-900 font-sans text-sm shrink-0">$240.00</span>
-                </div>
-                <p class="text-xs text-gray-500 mb-4">Full custom hair coloring session</p>
-              </div>
-              <button class="w-full bg-secondary text-white font-bold text-xs py-2.5 rounded-lg hover:bg-secondary-dark transition-colors shadow-sm uppercase tracking-wider">ADD TO CART</button>
-            </div>
-            <!-- Card 3 -->
-            <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm flex flex-col justify-between hover:border-secondary transition-colors">
-              <div>
-                <div class="flex justify-between items-start gap-2 mb-1">
-                  <h4 class="font-bold text-gray-800 text-sm">Keratin Smoothing The...</h4>
-                  <span class="font-bold text-gray-900 font-sans text-sm shrink-0">$180.00</span>
-                </div>
-                <p class="text-xs text-gray-500 mb-4">Smoothing and anti-frizz treatment</p>
-              </div>
-              <button class="w-full bg-secondary text-white font-bold text-xs py-2.5 rounded-lg hover:bg-secondary-dark transition-colors shadow-sm uppercase tracking-wider">ADD TO CART</button>
-            </div>
-            <!-- Card 4 -->
-            <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm flex flex-col justify-between hover:border-secondary transition-colors">
-              <div>
-                <div class="flex justify-between items-start gap-2 mb-1">
-                  <h4 class="font-bold text-gray-800 text-sm">Signature Gel Manicure</h4>
-                  <span class="font-bold text-gray-900 font-sans text-sm shrink-0">$45.00</span>
-                </div>
-                <p class="text-xs text-gray-500 mb-4">Clean, exfoliate and curation polish</p>
-              </div>
-              <button class="w-full bg-secondary text-white font-bold text-xs py-2.5 rounded-lg hover:bg-secondary-dark transition-colors shadow-sm uppercase tracking-wider">ADD TO CART</button>
-            </div>
-            <!-- Card 5 -->
-            <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm flex flex-col justify-between hover:border-secondary transition-colors">
-              <div>
-                <div class="flex justify-between items-start gap-2 mb-1">
-                  <h4 class="font-bold text-gray-800 text-sm">Hydrafacial Pro Treatm...</h4>
-                  <span class="font-bold text-gray-900 font-sans text-sm shrink-0">$150.00</span>
-                </div>
-                <p class="text-xs text-gray-500 mb-4">Resurfacing extraction &amp; skin lift</p>
-              </div>
-              <button class="w-full bg-secondary text-white font-bold text-xs py-2.5 rounded-lg hover:bg-secondary-dark transition-colors shadow-sm uppercase tracking-wider">ADD TO CART</button>
-            </div>
-            <!-- Card 6 -->
-            <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm flex flex-col justify-between hover:border-secondary transition-colors">
-              <div>
-                <div class="flex justify-between items-start gap-2 mb-1">
-                  <h4 class="font-bold text-gray-800 text-sm">Bridal Prep Makeup Gla...</h4>
-                  <span class="font-bold text-gray-900 font-sans text-sm shrink-0">$350.00</span>
-                </div>
-                <p class="text-xs text-gray-500 mb-4">Trial consultation and full glamour makeup</p>
-              </div>
-              <button class="w-full bg-secondary text-white font-bold text-xs py-2.5 rounded-lg hover:bg-secondary-dark transition-colors shadow-sm uppercase tracking-wider">ADD TO CART</button>
-            </div>
-            <!-- Card 7 -->
-            <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm flex flex-col justify-between hover:border-secondary transition-colors">
-              <div>
-                <div class="flex justify-between items-start gap-2 mb-1">
-                  <h4 class="font-bold text-gray-800 text-sm">L'Oréal Professionnel El...</h4>
-                  <span class="font-bold text-gray-900 font-sans text-sm shrink-0">$48.00</span>
-                </div>
-                <p class="text-xs text-gray-500 mb-4">Hair Care • In stock: 45</p>
-              </div>
-              <button class="w-full bg-secondary text-white font-bold text-xs py-2.5 rounded-lg hover:bg-secondary-dark transition-colors shadow-sm uppercase tracking-wider">ADD TO CART</button>
-            </div>
-            <!-- Card 8 -->
-            <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm flex flex-col justify-between hover:border-secondary transition-colors">
-              <div>
-                <div class="flex justify-between items-start gap-2 mb-1">
-                  <h4 class="font-bold text-gray-800 text-sm">Kerastase Nutritive Sha...</h4>
-                  <span class="font-bold text-gray-900 font-sans text-sm shrink-0">$35.00</span>
-                </div>
-                <p class="text-xs text-gray-500 mb-4">Hair Care • In stock: 8</p>
-              </div>
-              <button class="w-full bg-secondary text-white font-bold text-xs py-2.5 rounded-lg hover:bg-secondary-dark transition-colors shadow-sm uppercase tracking-wider">ADD TO CART</button>
-            </div>
+            @empty
+            <div class="col-span-1 md:col-span-2 text-center text-gray-500 py-10">No services available in the catalog.</div>
+            @endforelse
           </div>
         </div>
         <!-- Right Side: Register Checkout Order Panel (approx. 35-40% width) -->
@@ -124,11 +50,16 @@
             <div>
               <label class="block text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-2">CUSTOMER SELECTION</label>
               <div class="relative">
-                <input type="text" placeholder="Search customer directory..." class="w-full pl-10 pr-10 py-3 bg-[#FAF8F3] border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-secondary focus:border-secondary">
-                <i class="far fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                <button class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                  <i class="fas fa-times"></i>
-                </button>
+                <select class="w-full px-4 py-3 bg-[#FAF8F3] border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-secondary focus:border-secondary appearance-none cursor-pointer">
+                  <option value="" disabled selected>Search or select customer...</option>
+                  @foreach($clients as $client)
+                    <option value="{{ $client->id }}">{{ $client->name ?? $client->full_name }}</option>
+                  @endforeach
+                </select>
+                <i class="far fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 hidden"></i>
+                <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-400">
+                  <i class="fas fa-chevron-down text-xs"></i>
+                </div>
               </div>
             </div>
             <!-- Empty Cart Placeholder State -->
