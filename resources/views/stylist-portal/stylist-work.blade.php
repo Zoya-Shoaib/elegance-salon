@@ -28,7 +28,7 @@
           <span class="material-symbols-outlined text-lg">dashboard</span>
           <span>My Workspace</span>
         </a>
-        <a href="{{ route('login') }}" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 font-medium transition-colors">
+        <a href="{{ route('home') }}" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 font-medium transition-colors">
           <span class="material-symbols-outlined text-lg">logout</span>
           <span>Log Out</span>
         </a>

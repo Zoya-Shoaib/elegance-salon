@@ -67,7 +67,7 @@
           <span class="h-2 w-2 rounded-full bg-secondary"></span>
           <span>Receptionist Access</span>
         </div>
-        <a href="{{ route('login') }}" class="text-xs text-white/70 hover:text-secondary font-bold flex items-center gap-1.5 transition-colors">
+        <a href="{{ route('home') }}" class="text-xs text-white/70 hover:text-secondary font-bold flex items-center gap-1.5 transition-colors">
           <span class="material-symbols-outlined text-sm">logout</span>
           <span>Exit Console</span>
         </a>

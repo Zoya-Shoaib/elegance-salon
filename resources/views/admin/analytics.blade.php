@@ -20,52 +20,56 @@
           <span>Export PDF / CSV</span>
         </button>
       </div>
+
       <!-- Key Performance Metrics (KPIs) -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <!-- Card 1 -->
+        <!-- Card 1: Total Revenue -->
         <div class="bg-surface border border-secondary/20 rounded-2xl p-6 shadow-lg flex items-center justify-between">
           <div class="space-y-1">
             <span class="text-xs uppercase tracking-wider text-gray-500 font-bold">Total Monthly Revenue</span>
-            <h3 class="text-2xl font-bold text-primary font-sans">$14,250.00</h3>
+            <h3 class="text-2xl font-bold text-primary font-sans">${{ number_format($totalRevenue ?? 0, 2) }}</h3>
             <span class="inline-flex items-center gap-0.5 text-[10px] font-bold bg-green-50 text-green-700 border border-green-200 rounded px-1.5 py-0.5">
-              +12% vs last month
+              Live Database
             </span>
           </div>
           <div class="w-12 h-12 rounded-xl bg-background border border-secondary/30 flex items-center justify-center text-secondary text-xl">
             <span class="material-symbols-outlined">payments</span>
           </div>
         </div>
-        <!-- Card 2 -->
+
+        <!-- Card 2: Total Bookings -->
         <div class="bg-surface border border-secondary/20 rounded-2xl p-6 shadow-lg flex items-center justify-between">
           <div class="space-y-1">
             <span class="text-xs uppercase tracking-wider text-gray-500 font-bold">Total Bookings</span>
-            <h3 class="text-2xl font-bold text-primary font-sans">342 Appointments</h3>
+            <h3 class="text-2xl font-bold text-primary font-sans">{{ $totalBookings ?? 0 }} Appointments</h3>
             <span class="text-xs text-gray-400 font-semibold truncate block">Completed &amp; Confirmed</span>
           </div>
           <div class="w-12 h-12 rounded-xl bg-background border border-secondary/30 flex items-center justify-center text-secondary text-xl">
             <span class="material-symbols-outlined">event_note</span>
           </div>
         </div>
-        <!-- Card 3 -->
+
+        <!-- Card 3: Inventory Value -->
         <div class="bg-surface border border-secondary/20 rounded-2xl p-6 shadow-lg flex items-center justify-between">
           <div class="space-y-1">
             <span class="text-xs uppercase tracking-wider text-gray-500 font-bold">Inventory Value</span>
-            <h3 class="text-2xl font-bold text-primary font-sans">$4,850.00</h3>
+            <h3 class="text-2xl font-bold text-primary font-sans">${{ number_format($inventoryValue ?? 0, 2) }}</h3>
             <span class="text-xs font-semibold text-secondary flex items-center gap-1">
-              <i class="fas fa-exclamation-triangle"></i> 3 Low Stock Alerts
+              <i class="fas fa-exclamation-triangle text-amber-500"></i> {{ $lowStockCount ?? 0 }} Low Stock Alerts
             </span>
           </div>
           <div class="w-12 h-12 rounded-xl bg-background border border-secondary/30 flex items-center justify-center text-secondary text-xl">
             <span class="material-symbols-outlined">inventory_2</span>
           </div>
         </div>
-        <!-- Card 4 -->
+
+        <!-- Card 4: Top Performing Stylist -->
         <div class="bg-surface border border-secondary/20 rounded-2xl p-6 shadow-lg flex items-center justify-between">
           <div class="space-y-1">
             <span class="text-xs uppercase tracking-wider text-gray-500 font-bold">Top Performing Stylist</span>
-            <h3 class="text-2xl font-bold text-primary font-sans">Marcus</h3>
+            <h3 class="text-2xl font-bold text-primary font-sans">{{ $topStylist->full_name ?? 'N/A' }}</h3>
             <span class="text-xs font-semibold text-secondary flex items-center gap-1">
-              <i class="fas fa-star text-[10px]"></i> 4.9 Rating Leader
+              <i class="fas fa-user-tag text-[10px]"></i> {{ $topStylist->role ?? 'Lead Stylist' }}
             </span>
           </div>
           <div class="w-12 h-12 rounded-xl bg-background border border-secondary/30 flex items-center justify-center text-secondary text-xl">
@@ -73,18 +77,19 @@
           </div>
         </div>
       </div>
+
       <!-- Sales & Revenue Performance (SVG Line/Bar Chart) -->
       <div class="bg-surface border border-secondary/20 rounded-2xl p-6 shadow-lg mb-8">
         <div class="flex justify-between items-center mb-6">
           <h4 class="font-serif text-xl font-bold text-primary">Monthly Sales &amp; Revenue Trends</h4>
-          <span class="bg-background border border-secondary/30 text-gray-600 text-xs px-3 py-1 rounded-full font-semibold">Jan - Jun 2026</span>
+          <span class="bg-background border border-secondary/30 text-gray-600 text-xs px-3 py-1 rounded-full font-semibold">{{ date('Y') }} Overview</span>
         </div>
         <div class="h-72 w-full flex items-end justify-between gap-2 px-2 relative border-b border-l border-gray-200 pb-2">
           <!-- Y-Axis Labels -->
           <div class="absolute -left-10 top-0 h-full flex flex-col justify-between text-[10px] text-gray-400">
-            <span>$15k</span>
-            <span>$10k</span>
-            <span>$5k</span>
+            <span>Max</span>
+            <span>Mid</span>
+            <span>Low</span>
             <span>$0</span>
           </div>
           <!-- Static SVG Line & Bar Overlay -->
@@ -116,64 +121,32 @@
           </div>
         </div>
       </div>
+
       <!-- Popular Services & Peak Booking Hours Grid -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-        <!-- Left Column: Service Popularity Donut/Bar Chart -->
+        <!-- Left Column: Service Popularity Breakdown -->
         <div class="bg-surface border border-secondary/20 rounded-2xl p-6 shadow-lg flex flex-col justify-between">
           <div>
             <h4 class="font-serif text-lg font-bold text-primary mb-1">Service Popularity Breakdown</h4>
             <p class="text-xs text-gray-500 mb-6">Percentage allocation of total appointment bookings.</p>
           </div>
-          <div class="flex flex-col sm:flex-row items-center justify-center gap-8 flex-grow">
-            <!-- Mock Donut Chart -->
-            <div class="relative w-40 h-40 shrink-0">
-              <svg viewBox="0 0 36 36" class="w-full h-full drop-shadow-md">
-                <!-- BG -->
-                <path class="text-gray-100" stroke-width="4" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-                <!-- Hair Styling (45%) - Emerald -->
-                <path class="text-primary" stroke-dasharray="45, 100" stroke-width="4" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-                <!-- Facials (30%) - Gold -->
-                <path class="text-secondary" stroke-dasharray="30, 100" stroke-dashoffset="-45" stroke-width="4" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-                <!-- Mani/Pedi (25%) - Sage -->
-                <path class="text-sage" stroke-dasharray="25, 100" stroke-dashoffset="-75" stroke-width="4" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-              </svg>
-              <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
-                <span class="text-xs text-gray-500 font-bold uppercase tracking-wider">Services</span>
-                <span class="text-xl font-bold text-primary font-sans">342</span>
-              </div>
-            </div>
-            <!-- Breakdown list -->
-            <div class="w-full space-y-4">
+          <div class="w-full space-y-4">
+            @forelse($serviceBreakdown as $service)
               <div>
                 <div class="flex justify-between items-center text-xs font-semibold mb-1">
-                  <span class="flex items-center gap-2"><span class="h-3 w-3 bg-primary rounded-full"></span>Hair Styling &amp; Cuts</span>
-                  <span>45%</span>
+                  <span class="flex items-center gap-2"><span class="h-3 w-3 bg-primary rounded-full"></span>{{ $service->name }}</span>
+                  <span>{{ $service->percentage }}%</span>
                 </div>
                 <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
-                  <div class="bg-primary h-full rounded-full col-w-45"></div>
+                  <div class="bg-primary h-full rounded-full" style="width: {{ $service->percentage }}%"></div>
                 </div>
               </div>
-              <div>
-                <div class="flex justify-between items-center text-xs font-semibold mb-1">
-                  <span class="flex items-center gap-2"><span class="h-3 w-3 bg-secondary rounded-full"></span>Facials &amp; Skin Treatments</span>
-                  <span>30%</span>
-                </div>
-                <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
-                  <div class="bg-secondary h-full rounded-full col-w-30"></div>
-                </div>
-              </div>
-              <div>
-                <div class="flex justify-between items-center text-xs font-semibold mb-1">
-                  <span class="flex items-center gap-2"><span class="h-3 w-3 bg-sage rounded-full"></span>Manicures &amp; Pedicures</span>
-                  <span>25%</span>
-                </div>
-                <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
-                  <div class="bg-sage h-full rounded-full col-w-25"></div>
-                </div>
-              </div>
-            </div>
+            @empty
+              <p class="text-xs text-gray-400 text-center py-4">No services booked yet.</p>
+            @endforelse
           </div>
         </div>
+
         <!-- Right Column: Peak Booking Hours -->
         <div class="bg-surface border border-secondary/20 rounded-2xl p-6 shadow-lg flex flex-col justify-between">
           <div>
@@ -181,7 +154,6 @@
             <p class="text-xs text-gray-500 mb-6">Hourly appointment density indicating high traffic blocks.</p>
           </div>
           <div class="h-44 w-full flex items-end justify-between gap-3 border-b border-gray-200 pb-2 relative">
-            <!-- Bars -->
             <div class="w-12 bg-primary/20 hover:bg-primary transition-colors h-[25%] rounded-t-lg relative group flex justify-center">
               <span class="absolute -top-7 text-[10px] font-bold text-gray-500 bg-white px-1.5 py-0.5 rounded border border-gray-200 opacity-0 group-hover:opacity-100 shadow-sm transition-opacity">12%</span>
             </div>
@@ -192,7 +164,6 @@
               <span class="absolute -top-7 text-[10px] font-bold text-gray-500 bg-white px-1.5 py-0.5 rounded border border-gray-200 opacity-0 group-hover:opacity-100 shadow-sm transition-opacity">30%</span>
             </div>
             <div class="w-12 bg-secondary hover:bg-primary-container transition-colors h-[92%] rounded-t-lg relative group flex justify-center border-t-2 border-primary">
-              <!-- Golden Spike representing Peak Hours -->
               <span class="absolute -top-7 text-[10px] font-bold text-primary-container bg-secondary px-1.5 py-0.5 rounded border border-secondary shadow-sm">Peak</span>
             </div>
             <div class="w-12 bg-secondary/80 hover:bg-primary transition-colors h-[80%] rounded-t-lg relative group flex justify-center">
@@ -213,7 +184,8 @@
           </div>
         </div>
       </div>
-      <!-- Staff Performance & Commission Summary -->
+
+      <!-- Dynamic Staff Performance & Commission Summary -->
       <div class="bg-surface border border-secondary/20 rounded-2xl shadow-lg overflow-hidden mb-8">
         <div class="p-6 border-b border-gray-100 bg-gray-50/50">
           <h4 class="font-serif text-lg font-bold text-primary">Stylist Performance &amp; Commission</h4>
@@ -225,49 +197,39 @@
                 <th class="p-4 font-bold">Stylist Name</th>
                 <th class="p-4 font-bold text-center">Services Performed</th>
                 <th class="p-4 font-bold text-right">Total Sales Generated</th>
-                <th class="p-4 font-bold text-center">Average Rating</th>
+                <th class="p-4 font-bold text-center">Role / Shift</th>
                 <th class="p-4 font-bold text-right text-primary">Commission Earned</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-50 font-sans">
-              <!-- Row 1 -->
-              <tr class="hover:bg-gray-50/50">
-                <td class="p-4 font-bold text-gray-800 flex items-center gap-2">
-                  <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&amp;w=150&amp;auto=format&amp;fit=crop" class="w-6 h-6 rounded-full border border-secondary object-cover" alt="Marcus">
-                  <span>Marcus</span>
-                </td>
-                <td class="p-4 text-center text-gray-600 font-semibold">42 Services</td>
-                <td class="p-4 text-right text-gray-600 font-mono font-bold">$3,800.00</td>
-                <td class="p-4 text-center text-secondary font-bold"><i class="fas fa-star mr-1"></i>4.9</td>
-                <td class="p-4 text-right font-bold text-primary font-mono bg-green-50/30">$570.00</td>
-              </tr>
-              <!-- Row 2 -->
-              <tr class="hover:bg-gray-50/50">
-                <td class="p-4 font-bold text-gray-800 flex items-center gap-2">
-                  <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&amp;w=150&amp;auto=format&amp;fit=crop" class="w-6 h-6 rounded-full border border-secondary object-cover" alt="Dr. Helen">
-                  <span>Dr. Helen</span>
-                </td>
-                <td class="p-4 text-center text-gray-600 font-semibold">28 Services</td>
-                <td class="p-4 text-right text-gray-600 font-mono font-bold">$4,200.00</td>
-                <td class="p-4 text-center text-secondary font-bold"><i class="fas fa-star mr-1"></i>4.8</td>
-                <td class="p-4 text-right font-bold text-primary font-mono bg-green-50/30">$630.00</td>
-              </tr>
-              <!-- Row 3 -->
-              <tr class="hover:bg-gray-50/50">
-                <td class="p-4 font-bold text-gray-800 flex items-center gap-2">
-                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&amp;w=150&amp;auto=format&amp;fit=crop" class="w-6 h-6 rounded-full border border-secondary object-cover" alt="Mia Valentina">
-                  <span>Mia Valentina</span>
-                </td>
-                <td class="p-4 text-center text-gray-600 font-semibold">35 Services</td>
-                <td class="p-4 text-right text-gray-600 font-mono font-bold">$2,100.00</td>
-                <td class="p-4 text-center text-secondary font-bold"><i class="fas fa-star mr-1"></i>4.7</td>
-                <td class="p-4 text-right font-bold text-primary font-mono bg-green-50/30">$315.00</td>
-              </tr>
+              @forelse($stylists as $stylist)
+                @php
+                    $rate = $stylist->commission_rate ?? 0;
+                    $commission = $stylist->total_sales * ($rate / 100);
+                @endphp
+                <tr class="hover:bg-gray-50/50">
+                  <td class="p-4 font-bold text-gray-800 flex items-center gap-2">
+                    <img src="{{ asset($stylist->profile_image ?? 'https://via.placeholder.com/150') }}" class="w-6 h-6 rounded-full border border-secondary object-cover" alt="{{ $stylist->full_name }}">
+                    <span>{{ $stylist->full_name }}</span>
+                  </td>
+                  <td class="p-4 text-center text-gray-600 font-semibold">{{ $stylist->services_count }} Services</td>
+                  <td class="p-4 text-right text-gray-600 font-mono font-bold">${{ number_format($stylist->total_sales, 2) }}</td>
+                  <td class="p-4 text-center text-secondary font-bold">{{ $stylist->role }} <span class="text-[10px] text-gray-400 block">({{ $stylist->shift_days }})</span></td>
+                  <td class="p-4 text-right font-bold text-primary font-mono bg-green-50/30">
+                    ${{ number_format($commission, 2) }} <span class="text-[10px] text-gray-400 block">({{ $rate }}%)</span>
+                  </td>
+                </tr>
+              @empty
+                <tr>
+                  <td colspan="5" class="p-4 text-center text-gray-500">No staff record found.</td>
+                </tr>
+              @endforelse
             </tbody>
           </table>
         </div>
       </div>
-      <!-- Inventory Usage Trends -->
+
+      <!-- Dynamic Inventory Usage Trends -->
       <div class="bg-surface border border-secondary/20 rounded-2xl shadow-lg overflow-hidden">
         <div class="p-6 border-b border-gray-100 bg-gray-50/50">
           <h4 class="font-serif text-lg font-bold text-primary">Inventory Product Usage Trends</h4>
@@ -278,41 +240,39 @@
               <tr class="bg-gray-50 text-[10px] uppercase tracking-wider text-gray-500 border-b border-gray-100">
                 <th class="p-4 font-bold">Product Name</th>
                 <th class="p-4 font-bold">Usage Level</th>
-                <th class="p-4 font-bold">Current Stock</th>
+                <th class="p-4 font-bold">Current Stock Level</th>
                 <th class="p-4 font-bold">Status &amp; Actions</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-50">
-              <tr class="hover:bg-gray-50/50">
-                <td class="p-4 font-bold text-primary">Organic Keratin Serum</td>
-                <td class="p-4">
-                  <span class="inline-flex items-center gap-1.5 text-xs font-bold text-red-600"><span class="h-2 w-2 rounded-full bg-red-600"></span>High Usage</span>
-                </td>
-                <td class="p-4 font-mono font-bold">2 units</td>
-                <td class="p-4 text-xs font-semibold text-gray-500">
-                  <span class="text-red-600 font-bold block">Restock recommended within 5 days</span>
-                </td>
-              </tr>
-              <tr class="hover:bg-gray-50/50">
-                <td class="p-4 font-bold text-primary">Gold Leaf Polish (Gel)</td>
-                <td class="p-4">
-                  <span class="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600"><span class="h-2 w-2 rounded-full bg-amber-600"></span>Moderate Usage</span>
-                </td>
-                <td class="p-4 font-mono font-bold">5 units</td>
-                <td class="p-4 text-xs font-semibold text-gray-500">
-                  <span class="text-amber-600 font-bold block">Reorder within 10 days</span>
-                </td>
-              </tr>
-              <tr class="hover:bg-gray-50/50">
-                <td class="p-4 font-bold text-primary">Organic Hydrating Shampoo</td>
-                <td class="p-4">
-                  <span class="inline-flex items-center gap-1.5 text-xs font-bold text-green-600"><span class="h-2 w-2 rounded-full bg-green-600"></span>Normal Usage</span>
-                </td>
-                <td class="p-4 font-mono font-bold">42 units</td>
-                <td class="p-4 text-xs font-semibold text-gray-500">
-                  <span class="text-green-600 font-bold block">Stock levels healthy</span>
-                </td>
-              </tr>
+              @forelse($inventoryItems as $item)
+                <tr class="hover:bg-gray-50/50">
+                  <td class="p-4 font-bold text-primary">{{ $item->name }}</td>
+                  <td class="p-4">
+                    @if($item->stock_level <= 5)
+                      <span class="inline-flex items-center gap-1.5 text-xs font-bold text-red-600"><span class="h-2 w-2 rounded-full bg-red-600"></span>High Usage</span>
+                    @elseif($item->stock_level <= 15)
+                      <span class="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600"><span class="h-2 w-2 rounded-full bg-amber-600"></span>Moderate Usage</span>
+                    @else
+                      <span class="inline-flex items-center gap-1.5 text-xs font-bold text-green-600"><span class="h-2 w-2 rounded-full bg-green-600"></span>Normal Usage</span>
+                    @endif
+                  </td>
+                  <td class="p-4 font-mono font-bold">{{ $item->stock_level }} units</td>
+                  <td class="p-4 text-xs font-semibold text-gray-500">
+                    @if($item->stock_level <= 5)
+                      <span class="text-red-600 font-bold block">Restock recommended immediately</span>
+                    @elseif($item->stock_level <= 15)
+                      <span class="text-amber-600 font-bold block">Reorder within 10 days</span>
+                    @else
+                      <span class="text-green-600 font-bold block">Stock levels healthy</span>
+                    @endif
+                  </td>
+                </tr>
+              @empty
+                <tr>
+                  <td colspan="4" class="p-4 text-center text-gray-500">No inventory products found.</td>
+                </tr>
+              @endforelse
             </tbody>
           </table>
         </div>

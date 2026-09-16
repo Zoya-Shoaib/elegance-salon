@@ -37,114 +37,84 @@
                     <th class="p-4 font-bold">Supplier</th>
                     <th class="p-4 font-bold text-center">Cost/Unit</th>
                     <th class="p-4 font-bold text-center">Status</th>
+                    <th class="p-5 font-bold text-center">Actions</th>
                   </tr>
                 </thead>
                 <tbody class="text-sm divide-y divide-gray-50">
                   <!-- Low Stock Item 1 -->
-                  <tr class="hover:bg-gray-50/50 bg-red-50/30">
-                    <td class="p-4">
-                      <div class="font-bold text-primary">Keratin Treatment Kit</div>
-                      <div class="text-xs text-gray-500">Hair Treatments</div>
-                    </td>
-                    <td class="p-4">
-                      <div class="flex items-center justify-between text-xs mb-1">
-                        <span class="font-bold text-red-600">2 left</span>
-                        <span class="text-gray-400">Target: 20</span>
-                      </div>
-                      <div class="progress-bar-container">
-                        <div class="progress-bar-fill bg-red-500 col-w-10"></div>
-                      </div>
-                    </td>
-                    <td class="p-4 text-gray-600">Olaplex Pro Direct</td>
-                    <td class="p-4 text-center font-mono text-gray-600">$45.00</td>
-                    <td class="p-4 text-center">
-                      <span class="inline-block px-2 py-1 bg-red-100 text-red-800 border border-red-200 text-[10px] font-bold rounded-full uppercase tracking-wider"><i class="fas fa-exclamation-circle"></i> Critical</span>
-                    </td>
-                  </tr>
-                  <!-- Low Stock Item 2 -->
-                  <tr class="hover:bg-gray-50/50 bg-amber-50/30">
-                    <td class="p-4">
-                      <div class="font-bold text-primary">Gold Leaf Polish (Gel)</div>
-                      <div class="text-xs text-gray-500">Nail Supplies</div>
-                    </td>
-                    <td class="p-4">
-                      <div class="flex items-center justify-between text-xs mb-1">
-                        <span class="font-bold text-amber-600">5 left</span>
-                        <span class="text-gray-400">Target: 30</span>
-                      </div>
-                      <div class="progress-bar-container">
-                        <div class="progress-bar-fill bg-amber-500 col-w-16"></div>
-                      </div>
-                    </td>
-                    <td class="p-4 text-gray-600">OPI Salon Supplies</td>
-                    <td class="p-4 text-center font-mono text-gray-600">$18.50</td>
-                    <td class="p-4 text-center">
-                      <span class="inline-block px-2 py-1 bg-amber-100 text-amber-800 border border-amber-200 text-[10px] font-bold rounded-full uppercase tracking-wider"><i class="fas fa-exclamation-triangle"></i> Low</span>
-                    </td>
-                  </tr>
-                  <!-- Healthy Stock Item 1 -->
-                  <tr class="hover:bg-gray-50/50">
-                    <td class="p-4">
-                      <div class="font-bold text-primary">Organic Hydrating Shampoo</div>
-                      <div class="text-xs text-gray-500">Retail Products</div>
-                    </td>
-                    <td class="p-4">
-                      <div class="flex items-center justify-between text-xs mb-1">
-                        <span class="font-bold text-green-600">42 left</span>
-                        <span class="text-gray-400">Target: 50</span>
-                      </div>
-                      <div class="progress-bar-container">
-                        <div class="progress-bar-fill bg-green-500 col-w-84"></div>
-                      </div>
-                    </td>
-                    <td class="p-4 text-gray-600">Kevin Murphy Dist.</td>
-                    <td class="p-4 text-center font-mono text-gray-600">$22.00</td>
-                    <td class="p-4 text-center">
-                      <span class="inline-block px-2 py-1 bg-green-100 text-green-800 border border-green-200 text-[10px] font-bold rounded-full uppercase tracking-wider">Optimal</span>
-                    </td>
-                  </tr>
-                  <!-- Healthy Stock Item 2 -->
-                  <tr class="hover:bg-gray-50/50">
-                    <td class="p-4">
-                      <div class="font-bold text-primary">Dermaplaning Blades</div>
-                      <div class="text-xs text-gray-500">Aesthetics / Skin</div>
-                    </td>
-                    <td class="p-4">
-                      <div class="flex items-center justify-between text-xs mb-1">
-                        <span class="font-bold text-green-600">80 left</span>
-                        <span class="text-gray-400">Target: 100</span>
-                      </div>
-                      <div class="progress-bar-container">
-                        <div class="progress-bar-fill bg-green-500 col-w-80"></div>
-                      </div>
-                    </td>
-                    <td class="p-4 text-gray-600">MedSpa Supplies Inc.</td>
-                    <td class="p-4 text-center font-mono text-gray-600">$2.50</td>
-                    <td class="p-4 text-center">
-                      <span class="inline-block px-2 py-1 bg-green-100 text-green-800 border border-green-200 text-[10px] font-bold rounded-full uppercase tracking-wider">Optimal</span>
-                    </td>
-                  </tr>
-                  <!-- Healthy Stock Item 3 -->
-                  <tr class="hover:bg-gray-50/50">
-                    <td class="p-4">
-                      <div class="font-bold text-primary">Rose Water Toner</div>
-                      <div class="text-xs text-gray-500">Retail Products</div>
-                    </td>
-                    <td class="p-4">
-                      <div class="flex items-center justify-between text-xs mb-1">
-                        <span class="font-bold text-green-600">18 left</span>
-                        <span class="text-gray-400">Target: 25</span>
-                      </div>
-                      <div class="progress-bar-container">
-                        <div class="progress-bar-fill bg-green-500 col-w-72"></div>
-                      </div>
-                    </td>
-                    <td class="p-4 text-gray-600">MedSpa Supplies Inc.</td>
-                    <td class="p-4 text-center font-mono text-gray-600">$14.00</td>
-                    <td class="p-4 text-center">
-                      <span class="inline-block px-2 py-1 bg-green-100 text-green-800 border border-green-200 text-[10px] font-bold rounded-full uppercase tracking-wider">Optimal</span>
-                    </td>
-                  </tr>
+@foreach ($products as $product)
+    @if ($product->is_active)
+        <!-- ACTIVE PRODUCT ROW -->
+        <tr class="hover:bg-gray-50/50 bg-red-50/30">
+            <td class="p-4">
+                <div class="font-bold text-primary">{{$product->name}}</div>
+                <div class="text-xs text-gray-500">{{$product->category}}</div>
+            </td>
+            <td class="p-4">
+                <div class="flex items-center justify-between text-xs mb-1">
+                    <span class="font-bold text-red-600">{{ $product->stock_level }} left</span>
+                    <span class="text-gray-400">Target: {{$product->target_stock}}</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill bg-red-500 col-w-10"></div>
+                </div>
+            </td>
+            <td class="p-4 text-gray-600">{{$product->supplier_name}}</td>
+            <td class="p-4 text-center font-mono text-gray-600">${{$product->cost_per_unit}}</td>
+            
+            @if ($product->stock_level < 5)   
+                <td class="p-4 text-center">
+                    <span class="inline-block px-2 py-1 bg-red-100 text-red-800 border border-red-200 text-[10px] font-bold rounded-full uppercase tracking-wider">low</span>
+                </td>
+            @else
+                <td class="p-4 text-center">
+                    <span class="inline-block px-2 py-1 bg-green-100 text-green-800 border border-green-200 text-[10px] font-bold rounded-full uppercase tracking-wider">optimal</span>
+                </td>
+            @endif
+            
+            <td>
+                <button class="edit-btn w-8 h-8 rounded-lg bg-gray-50 border border-gray-200 text-primary hover:bg-primary hover:text-white hover:border-primary transition-colors ms-5 shadow-sm" data-id="{{ $product->id }}" data-name="{{ $product->name }}" data-category="{{ $product->category }}" data-stock="{{ $product->stock_level }}" data-target="{{ $product->target_stock }}" data-supplier="{{$product->supplier_name}}" data-cost="{{$product->cost_per_unit}}" data-active="{{$product->is_active}}">
+                    <span class="material-symbols-outlined text-sm">edit</span>
+                </button>
+            </td>
+        </tr>
+    @else
+        <!-- INACTIVE / ARCHIVED PRODUCT ROW -->
+        <!-- Fixed: Changed row background to bg-gray-50/40 to look beautifully quieted down -->
+        <tr class="hover:bg-gray-50/80 bg-gray-50/40 opacity-75">
+            <td class="p-4">
+                <!-- Fixed: Combined line-through with text-gray-400 so it looks dimmed -->
+                <div class="font-bold text-gray-400 line-through">{{$product->name}}</div>
+                <div class="text-xs text-gray-400/80 line-through">{{$product->category}}</div>
+            </td>
+            <td class="p-4">
+                <div class="flex items-center justify-between text-xs mb-1">
+                    <!-- Fixed: Removed text-red-600 from archived stock levels -->
+                    <span class="font-bold text-gray-400 line-through">{{ $product->stock_level }} left</span>
+                    <span class="text-gray-400/60 line-through">Target: {{$product->target_stock}}</span>
+                </div>
+                <div class="progress-bar-container opacity-40">
+                    <!-- Fixed: Muted the bar fill color to match an inactive state -->
+                    <div class="progress-bar-fill bg-gray-400 col-w-10"></div>
+                </div>
+            </td>
+            <td class="p-4 text-gray-400 line-through">{{$product->supplier_name}}</td>
+            <td class="p-4 text-center font-mono text-gray-400 line-through">${{$product->cost_per_unit}}</td>
+            
+            <td class="p-4 text-center">
+                <!-- Fixed: Clean layout matching your beautiful reference image pill -->
+                <span class="inline-block px-2 py-1 bg-slate-100 text-slate-700 border border-slate-200 text-[10px] font-bold rounded-full uppercase tracking-wider">archive</span>
+            </td>
+            <td>
+                <button class="edit-btn w-8 h-8 rounded-lg bg-gray-50 border border-gray-200 text-gray-400 hover:bg-primary hover:text-white hover:border-primary transition-colors ms-5 shadow-sm" data-id="{{ $product->id }}" data-name="{{ $product->name }}" data-category="{{ $product->category }}" data-stock="{{ $product->stock_level }}" data-target="{{ $product->target_stock }}" data-supplier="{{$product->supplier_name}}" data-cost="{{$product->cost_per_unit}}" data-active="{{$product->is_active}}">
+                    <span class="material-symbols-outlined text-sm">edit</span>
+                </button>
+            </td>
+        </tr>
+    @endif
+@endforeach
+
+        
                 </tbody>
               </table>
             </div>
@@ -230,47 +200,116 @@
         </button>
       </div>
       <div class="p-8">
-        <form class="space-y-6" onsubmit="event.preventDefault(); document.getElementById('addItemModal').classList.add('hidden');">
+        <form class="space-y-6" action="{{route('insert.inventory')}}" method="POST">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Item Name</label>
-              <input type="text" class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary text-gray-700" placeholder="e.g. Argan Oil Serum" required="">
+              <input type="text" class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary text-gray-700" placeholder="e.g. Argan Oil Serum" required="" name="name">
             </div>
             <div>
-              <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Category</label>
-              <select class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary appearance-none cursor-pointer">
-                <option>Hair Treatments</option>
-                <option>Nail Supplies</option>
-                <option>Retail Products</option>
-                <option>Aesthetics / Skin</option>
-              </select>
-            </div>
+            <label for="serviceCategory" class="block text-[10px] font-bold uppercase tracking-widest mb-2" style="color:#0b3c2c;">
+              Service Category <span class="text-red-400">*</span>
+            </label>
+            <select id="serviceCategory" name="category" required
+              class="field-cream w-full border rounded-lg px-4 py-3 text-sm text-gray-700 transition-all duration-200 pr-10">
+              <option value="" disabled selected>Select a category…</option>
+              <option value="hair">Hair Services</option>
+              <option value="skin">Skin &amp; Aesthetics</option>
+              <option value="nails">Nail Services</option>
+              <option value="makeup">Makeup &amp; Styling</option>
+              <option value="massage">Massage &amp; Wellness</option>
+              <option value="bridal">Bridal Packages</option>
+              <option value="other">Other / Bespoke</option>
+            </select>
+          </div>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Current Stock</label>
-              <input type="number" class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary text-gray-700" value="0" required="">
+              <input type="number" class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary text-gray-700" value="0" required="" name="stock_level">
             </div>
             <div>
               <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Target Stock</label>
-              <input type="number" class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary text-gray-700" value="10" required="">
+              <input type="number" class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary text-gray-700" value="10" required="" name="target_stock">
             </div>
             <div>
               <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Cost/Unit</label>
-              <input type="text" class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary text-gray-700" placeholder="$0.00" required="">
+              <input type="text" class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary text-gray-700" placeholder="$0.00" required="" name="cost_per_unit">
             </div>
           </div>
           <div>
             <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Supplier</label>
-            <select class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary appearance-none cursor-pointer">
-              <option>Olaplex Pro Direct</option>
-              <option>OPI Salon Supplies</option>
-              <option>MedSpa Supplies Inc.</option>
-              <option>+ Add New Supplier</option>
-            </select>
+           <input type="text" class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary text-gray-700" placeholder="Olaplex Pro Direct" required="" name="supplier_name">
           </div>
           <div class="flex items-center justify-end gap-4 mt-8 pt-4 border-t border-gray-100">
             <button type="button" class="px-6 py-3 border border-gray-300 text-gray-600 font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-gray-50 transition-colors" onclick="document.getElementById('addItemModal').classList.add('hidden')">Cancel</button>
+            <button type="submit" class="px-8 py-3 bg-secondary text-primary-container border border-secondary font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-[#EDD98A] transition-colors shadow-lg">Save Item</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Edit Item Modal -->
+  <div id="editItemModal" class="fixed inset-0 z-[100] modal-overlay hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl border border-secondary/20 overflow-hidden transform transition-all">
+      <div class="bg-primary-container p-6 flex justify-between items-center text-white border-b border-secondary/30">
+        <h3 class="font-serif text-2xl font-bold text-secondary">Edit Inventory Item</h3>
+        <button class="text-white/60 hover:text-white transition-colors" onclick="document.getElementById('editItemModal').classList.add('hidden')">
+          <i class="fas fa-times text-xl"></i>
+        </button>
+      </div>
+      <div class="p-8">
+        <form class="space-y-6" id="editModal" method="POST" >
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Item Name</label>
+              <input type="text" class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary text-gray-700" id="name" required="" name="name">
+            </div>
+            <div>
+            <label for="serviceCategory" class="block text-[10px] font-bold uppercase tracking-widest mb-2" style="color:#0b3c2c;">
+              Service Category <span class="text-red-400">*</span>
+            </label>
+            <select id="category" name="category" required
+              class="field-cream w-full border rounded-lg px-4 py-3 text-sm text-gray-700 transition-all duration-200 pr-10">
+              <option value="" disabled selected>Select a category…</option>
+              <option value="hair">Hair Services</option>
+              <option value="skin">Skin &amp; Aesthetics</option>
+              <option value="nails">Nail Services</option>
+              <option value="makeup">Makeup &amp; Styling</option>
+              <option value="massage">Massage &amp; Wellness</option>
+              <option value="bridal">Bridal Packages</option>
+              <option value="other">Other / Bespoke</option>
+            </select>
+          </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Current Stock</label>
+              <input type="number" class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary text-gray-700"  required="" name="stock_level" id="stock_level">
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Target Stock</label>
+              <input type="number" class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary text-gray-700"  required="" name="target_stock" id="target_stock">
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Cost/Unit</label>
+              <input type="text" class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary text-gray-700" placeholder="$0.00" required="" name="cost_per_unit" id="cost_per_unit">
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Supplier</label>
+           <input type="text" class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary text-gray-700" placeholder="Olaplex Pro Direct" required="" name="supplier_name" id="supplier_name">
+          </div>
+          <div>
+              <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Item Status</label>
+              <select class="w-full bg-background border border-secondary/30 rounded-lg px-4 py-3 text-sm focus:border-primary focus:ring-1 focus:ring-primary appearance-none cursor-pointer" name="is_active" id="is_active">
+                <option value="1">Active</option>
+                <option value="0">Archived</option>
+              </select>
+            </div>
+          <div class="flex items-center justify-end gap-4 mt-8 pt-4 border-t border-gray-100">
+            <button type="button" class="px-6 py-3 border border-gray-300 text-gray-600 font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-gray-50 transition-colors" onclick="document.getElementById('editItemModal').classList.add('hidden')">Cancel</button>
             <button type="submit" class="px-8 py-3 bg-secondary text-primary-container border border-secondary font-bold text-xs uppercase tracking-widest rounded-lg hover:bg-[#EDD98A] transition-colors shadow-lg">Save Item</button>
           </div>
         </form>
@@ -297,4 +336,5 @@
       </div>
     </div>
   </div>
+  
 @endsection

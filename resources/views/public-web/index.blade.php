@@ -14,7 +14,7 @@
   <script src="{{ asset('script.js') }}"></script>
 </head>
 <body>
-  <!-- ═══════════════════ MOBILE MENU ═══════════════════ -->
+<!-- ═══════════════════ MOBILE MENU ═══════════════════ -->
   <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigation Menu">
     <button class="mobile-close" id="mobileClose" aria-label="Close Menu"><i class="fas fa-times"></i></button>
     <a href="#" onclick="closeMobileMenu()">Home</a>
@@ -22,8 +22,31 @@
     <a href="#gallery" onclick="closeMobileMenu()">Gallery</a>
     <a href="#stylists" onclick="closeMobileMenu()">Our Stylists</a>
     <a href="#feedback-section" onclick="closeMobileMenu()">Contact Us</a>
-    <a href="{{route('login')}}" onclick="closeMobileMenu()" class="mobile-menu-portal-link">Staff Portal</a>
+
+    {{-- Guest View --}}
+    @guest
+      <a href="{{ route('login') }}" onclick="closeMobileMenu()" class="mobile-menu-portal-link">Staff Portal</a>
+    @endguest
+
+    {{-- Authenticated View --}}
+    @auth
+      @if(Auth::user()->role === 'admin')
+        <a href="{{ route('admin.dashboard') }}" onclick="closeMobileMenu()" class="mobile-menu-portal-link">Admin Dashboard</a>
+      @elseif(Auth::user()->role === 'receptionist')
+        <a href="{{ route('receptionist.dashboard') }}" onclick="closeMobileMenu()" class="mobile-menu-portal-link">Receptionist Dashboard</a>
+      @elseif(Auth::user()->role === 'stylist')
+        <a href="{{ route('stylist.dashboard') }}" onclick="closeMobileMenu()" class="mobile-menu-portal-link">Stylist Dashboard</a>
+      @endif
+
+      <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+        @csrf
+        <button type="submit" onclick="closeMobileMenu()" class="mobile-menu-portal-link" style="background: none; border: none; width: 100%; text-align: left; cursor: pointer;">
+          Logout
+        </button>
+      </form>
+    @endauth
   </div>
+
   <!-- ═══════════════════ NAVBAR ═══════════════════ -->
   <header id="main-nav" role="banner">
     <div class="nav-inner">
@@ -40,10 +63,41 @@
           <li><a href="#feedback-section" id="nav-contact">Contact</a></li>
         </ul>
       </nav>
-      <div class="nav-cta">
-        <a href="{{route('login')}}" class="btn-nav-portal" id="staffPortalBtn">
-          <i class="fas fa-user-circle staff-portal-icon"></i>Staff Portal
-        </a>
+
+      <div class="nav-cta" style="display: flex; align-items: center; gap: 10px;">
+        {{-- Guest CTA --}}
+        @guest
+          <a href="{{ route('login') }}" class="btn-nav-portal" id="staffPortalBtn">
+            <i class="fas fa-user-circle staff-portal-icon"></i>Login
+          </a>
+        @endguest
+
+        {{-- Authenticated CTA --}}
+        @auth
+          {{-- Dynamic Dashboard Route --}}
+          @if(Auth::user()->role === 'admin')
+            <a href="{{ route('admin.dashboard') }}" class="btn-nav-portal">
+              Admin Dashboard
+            </a>
+          @elseif(Auth::user()->role === 'receptionist')
+            <a href="{{ route('receptionist.dashboard') }}" class="btn-nav-portal">
+              Receptionist Dashboard
+            </a>
+          @elseif(Auth::user()->role === 'stylist')
+            <a href="{{ route('stylist.dashboard') }}" class="btn-nav-portal">
+              Stylist Dashboard
+            </a>
+          @endif
+
+          {{-- Logout Button --}}
+          <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
+            @csrf
+            <button type="submit" class="btn-nav-portal" class="btn-nav-portal">
+              <i class="fas fa-sign-out-alt staff-portal-icon"></i>Logout
+            </button>
+          </form>
+        @endauth
+
         <button class="nav-hamburger" id="hamburgerBtn" aria-label="Open Mobile Menu" aria-expanded="false" aria-controls="mobileMenu">
           <span></span><span></span><span></span>
         </button>

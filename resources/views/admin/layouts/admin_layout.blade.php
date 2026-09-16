@@ -32,11 +32,15 @@
           <span class="material-symbols-outlined text-lg">calendar_month</span>
           <span>Calendar Scheduler</span>
         </a>
+        <a href="{{route('appointments.index')}}" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 font-medium transition-colors">
+          <span class="material-symbols-outlined text-lg">event</span>
+          <span>Appointments</span>
+        </a>
         <a href="{{route('admin.clients')}}" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 font-medium transition-colors">
           <span class="material-symbols-outlined text-lg">group</span>
           <span>Clients Directory</span>
         </a>
-        <a href="{{route('admin.inventory')}}" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 font-medium transition-colors">
+        <a href="{{route('fetch.inventory')}}" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 font-medium transition-colors">
           <span class="material-symbols-outlined text-lg">inventory_2</span>
           <span>Inventory Vault</span>
         </a>
@@ -52,6 +56,11 @@
           <span class="material-symbols-outlined text-lg">bar_chart</span>
           <span>Reports &amp; Analytics</span>
         </a>
+       <a href="{{route('admin.services')}}"
+            class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-lg text-white/70 font-medium transition-colors">
+            <span class="material-symbols-outlined text-lg">spa</span>
+            <span >Services</span>
+          </a>
       </nav>
     </div>
     <!-- Active User -->
@@ -79,7 +88,7 @@
           <span class="h-2 w-2 rounded-full bg-secondary"></span>
           <span>Admin Access</span>
         </div>
-        <a href="{{route('login')}}" class="text-xs text-white/70 hover:text-secondary font-bold flex items-center gap-1.5 transition-colors">
+        <a href="{{route('home')}}" class="text-xs text-white/70 hover:text-secondary font-bold flex items-center gap-1.5 transition-colors">
           <span class="material-symbols-outlined text-sm">logout</span>
           <span>Exit Console</span>
         </a>

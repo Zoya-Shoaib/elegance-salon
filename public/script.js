@@ -307,3 +307,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 8000);
   }
 });
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.edit-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            // Open the modal container
+            document.getElementById('editItemModal').classList.remove('hidden');
+            
+            // Set the dynamic form route
+            document.getElementById('editModal').action = '/inventory/' + this.dataset.id;
+            
+            // Populating values safely
+            document.getElementById('name').value = this.dataset.name ;
+            document.getElementById('category').value = this.dataset.category ;
+            document.getElementById('stock_level').value = this.dataset.stock ;
+            document.getElementById('target_stock').value = this.dataset.target ;
+            document.getElementById('supplier_name').value = this.dataset.supplier ;
+            document.getElementById('cost_per_unit').value = this.dataset.cost ;
+            document.getElementById('is_active').value = this.dataset.active;
+        });
+    });
+});
