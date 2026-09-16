@@ -119,7 +119,7 @@
                     <span>{{ $service->percentage }}%</span>
                   </div>
                   <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
-                    <div class="bg-secondary h-full rounded-full" style="width: {{ $service->percentage }}%"></div>
+                    <div class="bg-secondary h-full rounded-full w-[{{ $service->percentage }}%]""></div>
                   </div>
                 </div>
               @empty
