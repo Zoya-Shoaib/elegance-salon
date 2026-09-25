@@ -1,58 +1,40 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Elegance Salon — Web Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A full-stack, role-based web application designed to streamline daily operations, staff workflows, and customer appointments for modern beauty salons and spas[cite: 1]. Built with **Laravel**,and **MySQL**, the system unifies dynamic appointment scheduling, inventory tracking, client records, and automated staff commission tracking into a single, cohesive dashboard[cite: 1].
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Key Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 🔐 Role-Based Access Control (RBAC)
+* **Admin Dashboard:** Full oversight of salon revenue, staff performance, services catalog, inventory levels, and system settings.
+* **Receptionist Portal:** Efficiently manage walk-in/online bookings, assign available stylists, re-schedule appointments, and issue customer invoices[cite: 1].
+* **Stylist View:** Personalized daily timetable,and completed client logs
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 📅 Smart Appointment & Client Management
+* Real-time slot availability based on staff schedules and service durations[cite: 1].
+* Centralized client database storing interaction history, preferred services, and visit records[cite: 1].
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 📦 Inventory & Stock Control
+* Track salon usage products vs. retail products[cite: 1].
+* Stock level monitoring to prevent shortages during peak hours[cite: 1].
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Tech Stack
 
-## Agentic Development
+* **Backend:** PHP 8.x, Laravel Framework (MVC Architecture, Eloquent ORM, Middleware Auth)[cite: 1]
+* **Frontend:** Blade Templating Engine, HTML5, CSS3, JavaScript, Bootstrap 5[cite: 1]
+* **Database:** MySQL (Relational Schema, Foreign Key Constraints, Indexes, Views)[cite: 1]
+* **Tools & Version Control:** Git, GitHub, Composer[cite: 1]
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+---
 
-```bash
-composer require laravel/boost --dev
+## Database Architecture Overview
 
-php artisan boost:install
-```
+The relational database is normalized to handle complex multi-entity relationships cleanly:
+* `users` & `roles` — Implements multi-guard authentication for Admins, Receptionists, and Stylists[cite: 1].
+* `appointments` — Connects `clients`, `services`, and `staff` with precise time slot mapping[cite: 1].
+* `inventory` — Tracks product usage per service and retail stock balances[cite: 1].
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
