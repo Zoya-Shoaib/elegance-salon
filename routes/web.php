@@ -70,6 +70,11 @@ Route::middleware(['auth', 'receptionist'])->group(function () {
     Route::get('/rec-clients', [ReceptionistController::class, 'clients'])->name('receptionist.clients');
     Route::get('/rec-posCheckout', [ReceptionistController::class, 'pos_checkout'])->name('receptionist.posCheckout');
     Route::get('/rec-schedular', [ReceptionistController::class, 'schedular'])->name('receptionist.scheduler');
+
+    // Shared actions available to receptionist
+    Route::post('/rec-posCheckout', [OrderController::class, 'insert'])->name('receptionist.insert.order');
+    Route::post('/rec-appointments/store', [AppointmentController::class, 'store'])->name('receptionist.appointments.store');
+    Route::post('/rec-clients', [ClientController::class, 'store'])->name('receptionist.clients.store');
 });
 
 

@@ -23,17 +23,17 @@
 @endif
 
 <!-- Content Area -->
-<div class="flex-grow p-8 overflow-y-auto scrollbar-lux space-y-12">
+<div class="flex-grow p-4 sm:p-6 lg:p-8 overflow-y-auto scrollbar-lux space-y-8 sm:space-y-12">
 
   <!-- Page Title Row -->
-  <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+  <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
     <div>
-      <h1 class="font-serif text-3xl font-bold" style="color:#0b3c2c;">Register Checkout Order</h1>
-      <p class="text-sm text-gray-500 mt-1">Select client details, assign a stylist, and choose the services provided for this visit.</p>
+      <h1 class="font-serif text-2xl sm:text-3xl font-bold" style="color:#0b3c2c;">Register Checkout Order</h1>
+      <p class="text-xs sm:text-sm text-gray-500 mt-1">Select client details, assign a stylist, and choose the services provided for this visit.</p>
     </div>
     <div>
       <a href="{{ route('admin.services') }}" id="viewServicesBtn"
-        class="btn-gold inline-flex items-center gap-2 font-bold text-xs px-6 py-3 h-12 rounded-full shadow-lg"
+        class="btn-gold inline-flex items-center justify-center gap-2 font-bold text-xs px-6 py-3 h-12 rounded-full shadow-lg w-full sm:w-auto"
         style="color:#0A4A35;">
         <span class="material-symbols-outlined text-sm">spa</span>
         <span>Add New Service</span>
@@ -45,7 +45,7 @@
   <div class="form-card bg-white border border-secondary/20 rounded-2xl shadow-lg overflow-hidden">
     <div class="h-1 w-full" style="background:linear-gradient(90deg,#0b3c2c 0%,#D4AF37 50%,#0b3c2c 100%);"></div>
 
-    <div class="p-8 md:p-10">
+    <div class="p-5 sm:p-8 md:p-10">
       <form id="checkoutOrderForm" class="space-y-8" action="{{route('insert.order')}}" method="POST">
         @csrf
 
@@ -165,18 +165,18 @@
     </div>
 
     <!-- Form Actions -->
-    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-gray-100 mt-2">
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-6 border-t border-gray-100 mt-2">
       <p class="text-xs text-gray-400 italic flex items-center gap-1.5">
         <span class="material-symbols-outlined text-secondary" style="font-size:14px;">info</span>
         Fields marked <span class="text-red-400 font-bold mx-1">*</span> are required to complete the checkout.
       </p>
-      <div class="flex items-center gap-3 shrink-0">
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto shrink-0">
         <button type="reset" id="cancelBtn"
-          class="btn-cancel px-6 py-3 border border-gray-300 text-gray-600 font-bold text-xs uppercase tracking-widest rounded-lg">
+          class="btn-cancel px-6 py-3 border border-gray-300 text-gray-600 font-bold text-xs uppercase tracking-widest rounded-lg w-full sm:w-auto text-center justify-center">
           Clear Order
         </button>
         <button type="submit" id="saveOrderBtn"
-          class="btn-save px-8 py-3 border border-secondary font-bold text-xs uppercase tracking-widest rounded-lg shadow-lg flex items-center gap-2">
+          class="btn-save px-6 sm:px-8 py-3 border border-secondary font-bold text-xs uppercase tracking-widest rounded-lg shadow-lg flex items-center justify-center gap-2 w-full sm:w-auto">
           <span class="material-symbols-outlined text-sm">receipt</span>
           Save Order &amp; Receipt
         </button>
@@ -188,12 +188,12 @@
 </div>
 
 <!-- Orders Table Section (Static Version) -->
-<div class="mt-12">
-  <h2 class="font-serif text-3xl font-bold mb-6" style="color:#0b3c2c;">Orders List</h2>
+<div class="mt-8 sm:mt-12">
+  <h2 class="font-serif text-2xl sm:text-3xl font-bold mb-4 sm:mb-6" style="color:#0b3c2c;">Orders List</h2>
 
   <div class="bg-white rounded-3xl shadow-lg border border-secondary/10 overflow-hidden">
-    <div class="overflow-x-auto">
-      <table class="w-full text-left border-collapse">
+    <div class="overflow-x-auto scrollbar-lux">
+      <table class="w-full text-left border-collapse min-w-[750px]">
         <thead>
           <tr style="background-color: #0b3c2c; color: #D4AF37;">
             <th class="py-4 px-6 text-xs font-bold uppercase tracking-wider">ID</th>

@@ -3,32 +3,32 @@
 @section('content')
 
     <!-- Content Area -->
-    <div class="flex-grow p-8 overflow-y-auto scrollbar-lux" 
+    <div class="flex-grow p-4 sm:p-6 lg:p-8 overflow-y-auto scrollbar-lux" 
          id="clientsContainer" 
          data-store-url="{{ route('admin.clients.store') }}" 
          data-update-url="{{ url('/admin-clients') }}">
       
       <!-- Top Actions & Search -->
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6 mb-6 sm:mb-8">
         <div>
-          <h2 class="font-serif text-3xl font-bold text-primary">Clients Directory</h2>
-          <p class="text-sm text-gray-500">Manage client profiles, preferences, and visit history.</p>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-primary">Clients Directory</h2>
+          <p class="text-xs sm:text-sm text-gray-500">Manage client profiles, preferences, and visit history.</p>
         </div>
-        <div class="flex flex-col sm:flex-row items-center gap-4">
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full md:w-auto">
           <!-- Search & Filter -->
-          <form method="GET" action="{{ route('admin.clients') }}" class="flex border border-secondary/30 rounded-full bg-surface shadow-sm overflow-hidden h-12 w-full sm:w-auto">
-            <div class="px-4 flex items-center text-gray-400 bg-gray-50 border-r border-secondary/30">
+          <form method="GET" action="{{ route('admin.clients') }}" class="flex border border-secondary/30 rounded-2xl sm:rounded-full bg-surface shadow-sm overflow-hidden h-12 w-full sm:w-auto">
+            <div class="px-3 sm:px-4 flex items-center text-gray-400 bg-gray-50 border-r border-secondary/30 shrink-0">
               <i class="fas fa-search"></i>
             </div>
-            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by name or email..." class="border-none focus:ring-0 px-4 py-2 w-64 text-sm text-gray-700 bg-transparent">
-            <select name="filter" onchange="this.form.submit()" class="border-none focus:ring-0 bg-gray-50 text-sm font-semibold border-l border-secondary/30 text-primary cursor-pointer px-4">
-              <option value="">All Clients</option>
-              <option value="vip" @selected(request('filter') === 'vip')>VIP Members</option>
-              <option value="recent" @selected(request('filter') === 'recent')>Recent Visitors</option>
+            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by name or email..." class="border-none focus:ring-0 px-3 sm:px-4 py-2 w-full sm:w-56 md:w-64 text-sm text-gray-700 bg-transparent min-w-0">
+            <select name="filter" onchange="this.form.submit()" class="border-none focus:ring-0 bg-gray-50 text-xs sm:text-sm font-semibold border-l border-secondary/30 text-primary cursor-pointer px-2 sm:px-4 shrink-0">
+              <option value="">All</option>
+              <option value="vip" @selected(request('filter') === 'vip')>VIP</option>
+              <option value="recent" @selected(request('filter') === 'recent')>Recent</option>
             </select>
           </form>
           <!-- Add Button -->
-          <button type="button" class="bg-secondary text-primary-container font-bold text-xs px-6 py-3 h-12 rounded-full hover:bg-[#EDD98A] transition-colors flex items-center gap-2 shadow-lg w-full sm:w-auto justify-center" onclick="openClientModal()">
+          <button type="button" class="bg-secondary text-primary-container font-bold text-xs px-5 sm:px-6 py-3 h-12 rounded-2xl sm:rounded-full hover:bg-[#EDD98A] transition-colors flex items-center gap-2 shadow-lg w-full sm:w-auto justify-center shrink-0" onclick="openClientModal()">
             <span class="material-symbols-outlined text-sm">person_add</span>
             <span>Register Client</span>
           </button>
@@ -53,8 +53,8 @@
 
       <!-- Client Database Table -->
       <div class="bg-surface border border-secondary/20 rounded-2xl shadow-lg overflow-hidden">
-        <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse min-w-[1000px]">
+        <div class="overflow-x-auto scrollbar-lux">
+          <table class="w-full text-left border-collapse min-w-[900px]">
             <thead>
               <tr class="bg-gray-50 text-[10px] uppercase tracking-wider text-gray-500 border-b border-secondary/20">
                 <th class="p-5 font-bold">Client Profile</th>
@@ -136,8 +136,8 @@
 
   <!-- Modals (Hidden by Default) -->
   <!-- Add/Edit Client Modal (Responsive & Scrollable) -->
-  <div id="clientModal" class="fixed inset-0 z-[100] modal-overlay hidden flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm overflow-y-auto">
-    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl border border-secondary/20 overflow-hidden transform transition-all my-auto max-h-[90vh] flex flex-col">
+  <div id="clientModal" class="fixed inset-0 z-[100] modal-overlay hidden flex items-center justify-center p-3 sm:p-4 bg-black/50 backdrop-blur-sm overflow-y-auto">
+    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl mx-auto border border-secondary/20 overflow-hidden transform transition-all my-auto max-h-[90vh] flex flex-col">
       
       <!-- Sticky Header -->
       <div class="bg-primary-container p-5 flex justify-between items-center text-white border-b border-secondary/30 shrink-0">

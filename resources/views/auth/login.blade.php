@@ -16,16 +16,16 @@
   <script src="{{asset('script.js')}}"></script>
   <link rel="stylesheet" href="{{asset('style.css')}}">
 </head>
-<body class="h-screen w-screen relative flex items-center justify-center bg-background-dark overflow-hidden">
+<body class="min-h-screen w-full relative flex items-center justify-center bg-background-dark overflow-y-auto py-8 px-4">
 
   <!-- Background image covering the screen -->
-  <div class="absolute inset-0 bg-cover bg-center select-none login-bg"></div>
+  <div class="fixed inset-0 bg-cover bg-center select-none login-bg"></div>
 
   <!-- Emerald dark gradient overlay (0.85 opacity) -->
-  <div class="absolute inset-0 bg-gradient-to-tr from-background-dark/95 via-emerald-deep/90 to-background-dark/95 z-0"></div>
+  <div class="fixed inset-0 bg-gradient-to-tr from-background-dark/95 via-emerald-deep/90 to-background-dark/95 z-0"></div>
 
   <!-- Perfectly Centered Glassmorphic Login Card -->
-  <div class="w-full max-w-md mx-4 bg-black/40 backdrop-blur-md border border-secondary/20 rounded-3xl p-8 sm:p-10 shadow-2xl relative z-10">
+  <div class="w-full max-w-md mx-auto bg-black/40 backdrop-blur-md border border-secondary/20 rounded-3xl p-6 sm:p-10 shadow-2xl relative z-10 my-auto">
 
     <!-- Gold Serif Logo at the top -->
     <div class="text-center mb-8">
@@ -97,7 +97,7 @@
     </form>
 
     <!-- Footer Links inside Card -->
-    <div class="mt-8 pt-6 border-t border-white/10 flex justify-between text-[11px] font-bold uppercase tracking-wider text-secondary/60">
+    <div class="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-3 sm:gap-0 justify-between items-center text-[11px] font-bold uppercase tracking-wider text-secondary/60">
       <a href="#" class="hover:text-secondary transition-colors" onclick="alert('Password reset link sent to your registered email address.')">Forgot Password?</a>
       <a href="{{route('home')}}" class="hover:text-secondary transition-colors flex items-center gap-1">
         <span class="material-symbols-outlined text-xs">arrow_back</span>

@@ -29,12 +29,27 @@ class AdminController extends Controller
             ->take(5)
             ->get();
 
+        // Service Popularity Breakdown for dashboard chart
+        $totalServicesCount = Orders::count();
+        $serviceBreakdown = DB::table('orders')
+            ->join('services', 'orders.service_id_1', '=', 'services.id')
+            ->select('services.name', DB::raw('count(*) as count'))
+            ->groupBy('services.id', 'services.name')
+            ->get()
+            ->map(function ($service) use ($totalServicesCount) {
+                $service->percentage = $totalServicesCount > 0
+                    ? round(($service->count / $totalServicesCount) * 100)
+                    : 0;
+                return $service;
+            });
+
         return view('admin.dashboard', compact(
             'totalRevenue',
             'totalBookings',
             'lowStockCount',
             'activeStaffCount',
-            'appointments'
+            'appointments',
+            'serviceBreakdown'
         ));
     }
     function analytics()
@@ -174,7 +189,15 @@ class AdminController extends Controller
     {
         $staff = Staff::all();
 
-        return view('admin.staff', compact('staff'));
+        // Dynamic commission data from orders
+        $commissionData = Staff::select('staff.*')
+            ->selectRaw('COALESCE(SUM(orders.total_amount), 0) as total_sales')
+            ->selectRaw('COUNT(orders.id) as services_count')
+            ->leftJoin('orders', 'staff.id', '=', 'orders.staff_id')
+            ->groupBy('staff.id')
+            ->get();
+
+        return view('admin.staff', compact('staff', 'commissionData'));
     }
     function services()
     {

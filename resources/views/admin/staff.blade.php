@@ -1,7 +1,7 @@
 @extends('admin.layouts.admin_layout')
 @section('content')
     <!-- Content Area -->
-    <div class="flex-grow p-8 overflow-y-auto scrollbar-lux">
+    <div class="flex-grow p-4 sm:p-6 lg:p-8 overflow-y-auto scrollbar-lux">
       <div class="mb-8">
         <h2 class="font-serif text-3xl font-bold text-primary">Staff Management</h2>
         <p class="text-sm text-gray-500">Coordinate shifts, review task assignments, and track commission payouts.</p>
@@ -80,43 +80,28 @@ class="px-6 py-3 bg-secondary rounded-lg">
           <h3 class="font-serif text-xl font-bold text-primary mb-4">Today's Task &amp; Shift Planner</h3>
           <div class="bg-surface border border-secondary/20 rounded-2xl shadow-lg overflow-hidden">
             <div class="overflow-x-auto">
-              <table class="w-full text-left border-collapse">
+              <table class="w-full text-left border-collapse min-w-[560px]">
                 <thead>
                   <tr class="bg-gray-50 text-[10px] uppercase tracking-wider text-gray-500 border-b border-gray-100">
                     <th class="p-4 font-bold">Stylist</th>
-                    <th class="p-4 font-bold">Shift Block</th>
-                    <th class="p-4 font-bold">Assigned Tasks / Focus</th>
+                    <th class="p-4 font-bold">Shift Days</th>
+                    <th class="p-4 font-bold">Focus / Specialty</th>
                   </tr>
                 </thead>
                 <tbody class="text-sm divide-y divide-gray-50">
+                  @forelse($staff as $member)
                   <tr class="hover:bg-gray-50/50">
-                    <td class="p-4 font-bold text-primary">Clarissa Gold</td>
-                    <td class="p-4 text-xs font-mono text-gray-600">09:00 AM - 06:00 PM</td>
+                    <td class="p-4 font-bold text-primary">{{ $member->full_name }}</td>
+                    <td class="p-4 text-xs font-mono text-gray-600">{{ $member->shift_days ?? 'TBD' }}</td>
                     <td class="p-4">
-                      <span class="inline-block px-2 py-0.5 bg-blue-50 text-blue-700 text-[10px] rounded border border-blue-200 mb-1">Color Consultations</span><br>
-                      <span class="inline-block px-2 py-0.5 bg-purple-50 text-purple-700 text-[10px] rounded border border-purple-200">VIP Bridal Styling (2 PM)</span>
+                      <span class="inline-block px-2 py-0.5 bg-blue-50 text-blue-700 text-[10px] rounded border border-blue-200">{{ ucfirst($member->role) }}</span>
                     </td>
                   </tr>
-                  <tr class="hover:bg-gray-50/50">
-                    <td class="p-4 font-bold text-primary">Mia Valentina</td>
-                    <td class="p-4 text-xs font-mono text-gray-600">09:00 AM - 05:00 PM</td>
-                    <td class="p-4">
-                      <span class="inline-block px-2 py-0.5 bg-green-50 text-green-700 text-[10px] rounded border border-green-200 mb-1">Gel Manicure Walk-ins</span><br>
-                      <span class="inline-block px-2 py-0.5 bg-gray-100 text-gray-600 text-[10px] rounded border border-gray-200">Inventory check (Nail Polish)</span>
-                    </td>
+                  @empty
+                  <tr>
+                    <td colspan="3" class="p-4 text-center text-gray-400 text-xs">No staff assigned today.</td>
                   </tr>
-                  <tr class="hover:bg-gray-50/50 opacity-50">
-                    <td class="p-4 font-bold text-primary">Dr. Helen</td>
-                    <td class="p-4 text-xs font-mono text-gray-600">Off Duty</td>
-                    <td class="p-4 text-xs text-gray-500 italic">No tasks assigned today.</td>
-                  </tr>
-                  <tr class="hover:bg-gray-50/50">
-                    <td class="p-4 font-bold text-primary">Victoria</td>
-                    <td class="p-4 text-xs font-mono text-gray-600">11:00 AM - 08:00 PM</td>
-                    <td class="p-4">
-                      <span class="inline-block px-2 py-0.5 bg-amber-50 text-amber-700 text-[10px] rounded border border-amber-200 mb-1">Event Makeup Prep</span>
-                    </td>
-                  </tr>
+                  @endforelse
                 </tbody>
               </table>
             </div>
@@ -130,7 +115,7 @@ class="px-6 py-3 bg-secondary rounded-lg">
           </div>
           <div class="bg-surface border border-secondary/20 rounded-2xl shadow-lg overflow-hidden">
             <div class="overflow-x-auto">
-              <table class="w-full text-left border-collapse text-sm">
+              <table class="w-full text-left border-collapse text-sm min-w-[540px]">
                 <thead>
                   <tr class="bg-gray-50 text-[10px] uppercase tracking-wider text-gray-500 border-b border-gray-100">
                     <th class="p-4 font-bold">Stylist</th>
@@ -140,39 +125,35 @@ class="px-6 py-3 bg-secondary rounded-lg">
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-50">
+                  @php $totalSalesSum = 0; $totalPayoutSum = 0; @endphp
+                  @forelse($commissionData ?? [] as $member)
+                  @php
+                    $payout = ($member->total_sales * ($member->commission_rate ?? 0)) / 100;
+                    $totalSalesSum += $member->total_sales;
+                    $totalPayoutSum += $payout;
+                  @endphp
                   <tr class="hover:bg-gray-50/50">
-                    <td class="p-4 font-bold text-gray-800">Clarissa Gold</td>
-                    <td class="p-4 text-right text-gray-600 font-mono">$12,450.00</td>
-                    <td class="p-4 text-center font-bold text-secondary">20%</td>
-                    <td class="p-4 text-right font-bold text-primary font-mono bg-green-50/30">$2,490.00</td>
+                    <td class="p-4 font-bold text-gray-800">{{ $member->full_name }}</td>
+                    <td class="p-4 text-right text-gray-600 font-mono">${{ number_format($member->total_sales, 2) }}</td>
+                    <td class="p-4 text-center font-bold text-secondary">{{ $member->commission_rate ?? 0 }}%</td>
+                    <td class="p-4 text-right font-bold text-primary font-mono bg-green-50/30">${{ number_format($payout, 2) }}</td>
                   </tr>
-                  <tr class="hover:bg-gray-50/50">
-                    <td class="p-4 font-bold text-gray-800">Dr. Helen</td>
-                    <td class="p-4 text-right text-gray-600 font-mono">$8,200.00</td>
-                    <td class="p-4 text-center font-bold text-secondary">15%</td>
-                    <td class="p-4 text-right font-bold text-primary font-mono bg-green-50/30">$1,230.00</td>
+                  @empty
+                  <tr>
+                    <td colspan="4" class="p-4 text-center text-gray-400 text-xs">No commission data available.</td>
                   </tr>
-                  <tr class="hover:bg-gray-50/50">
-                    <td class="p-4 font-bold text-gray-800">Mia Valentina</td>
-                    <td class="p-4 text-right text-gray-600 font-mono">$5,100.00</td>
-                    <td class="p-4 text-center font-bold text-secondary">15%</td>
-                    <td class="p-4 text-right font-bold text-primary font-mono bg-green-50/30">$765.00</td>
-                  </tr>
-                  <tr class="hover:bg-gray-50/50">
-                    <td class="p-4 font-bold text-gray-800">Victoria</td>
-                    <td class="p-4 text-right text-gray-600 font-mono">$6,800.00</td>
-                    <td class="p-4 text-center font-bold text-secondary">15%</td>
-                    <td class="p-4 text-right font-bold text-primary font-mono bg-green-50/30">$1,020.00</td>
-                  </tr>
+                  @endforelse
                 </tbody>
+                @if(($commissionData ?? collect())->count() > 0)
                 <tfoot>
                   <tr class="bg-gray-50 border-t-2 border-gray-200 font-bold">
                     <td class="p-4 text-gray-800 uppercase text-xs tracking-wider">Period Totals</td>
-                    <td class="p-4 text-right text-gray-600 font-mono">$32,550.00</td>
+                    <td class="p-4 text-right text-gray-600 font-mono">${{ number_format($totalSalesSum, 2) }}</td>
                     <td class="p-4 text-center text-gray-400">-</td>
-                    <td class="p-4 text-right text-primary text-lg font-mono">$5,505.00</td>
+                    <td class="p-4 text-right text-primary text-lg font-mono">${{ number_format($totalPayoutSum, 2) }}</td>
                   </tr>
                 </tfoot>
+                @endif
               </table>
             </div>
             <div class="p-4 border-t border-gray-100 flex justify-end">
@@ -185,8 +166,8 @@ class="px-6 py-3 bg-secondary rounded-lg">
  
  <!-- Conversation with Gemini -->
  <!-- Add Staff Modal -->
-  <div id="addStaffModal" class="fixed inset-0 z-[100] modal-overlay hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl border border-secondary/20 overflow-hidden transform transition-all">
+  <div id="addStaffModal" class="fixed inset-0 z-[100] modal-overlay hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl border border-secondary/20 overflow-hidden transform transition-all my-auto max-h-[90vh] flex flex-col">
       <div class="bg-primary-container p-6 flex justify-between items-center text-white border-b border-secondary/30">
   <h3 id="modalTitle" class="font-serif text-2xl font-bold text-secondary">
     Add New Staff Member
@@ -195,7 +176,7 @@ class="px-6 py-3 bg-secondary rounded-lg">
           <i class="fas fa-times text-xl"></i>
         </button>
       </div>
-      <div class="p-8">
+      <div class="p-5 sm:p-8 overflow-y-auto scrollbar-lux flex-grow">
 <form   id="staffForm" action="{{ route('staff.store') }}"
       method="POST"
       enctype="multipart/form-data">

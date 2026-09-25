@@ -2,7 +2,7 @@
 @section('content')
 
     <!-- Content Area -->
-    <div class="flex-grow p-8 overflow-y-auto scrollbar-lux space-y-8">
+    <div class="flex-grow p-4 sm:p-6 lg:p-8 overflow-y-auto scrollbar-lux space-y-8">
       <!-- Header Title -->
       <div>
         <h2 class="font-serif text-3xl font-bold text-primary">Front Desk Console</h2>
@@ -48,7 +48,7 @@
           <span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Confirmed Lists</span>
         </div>
         <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse">
+          <table class="w-full text-left border-collapse min-w-[600px]">
             <thead>
               <tr class="bg-[#FAF8F3]/50 text-[10px] uppercase tracking-wider text-gray-500 border-b border-gray-100">
                 <th class="p-5 font-bold">Client Name</th>

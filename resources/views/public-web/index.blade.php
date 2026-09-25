@@ -92,7 +92,7 @@
           {{-- Logout Button --}}
           <form action="{{ route('logout') }}" method="POST" style="margin: 0;">
             @csrf
-            <button type="submit" class="btn-nav-portal" class="btn-nav-portal">
+            <button type="submit" class="btn-nav-portal">
               <i class="fas fa-sign-out-alt staff-portal-icon"></i>Logout
             </button>
           </form>
@@ -142,28 +142,24 @@
             <div class="card-icon"><i class="fas fa-calendar-alt"></i></div>
             <div class="card-label">Today's Appointments</div>
             <div class="card-value">{{ $todayAppointments }}</div>
-            <div class="card-sub">Active bookings</div>
           </div>
           <!-- Card 2 -->
           <div class="glass-card">
             <div class="card-icon"><i class="fas fa-cut"></i></div>
             <div class="card-label">Active Stylists</div>
             <div class="card-value">{{ $activeStylists }}</div>
-            <div class="card-sub">All available today</div>
           </div>
           <!-- Card 3 -->
-          <div class="glass-card">
+          <div class="glass-card card-hide-sm">
             <div class="card-icon"><i class="fas fa-users"></i></div>
             <div class="card-label">Monthly Clients</div>
             <div class="card-value">{{ $monthlyClients }}</div>
-            <div class="card-sub">Unique this month</div>
           </div>
           <!-- Card 4 -->
-          <div class="glass-card">
+          <div class="glass-card card-hide-sm">
             <div class="card-icon"><i class="fas fa-dollar-sign"></i></div>
             <div class="card-label">Revenue Today</div>
             <div class="card-value">${{ number_format($revenueToday, 2) }}</div>
-            <div class="card-sub">Real-time update</div>
           </div>
           <!-- Card 5 – Full width: satisfaction -->
           <div class="glass-card span-2">
@@ -172,7 +168,7 @@
               <div class="card-label">Customer Satisfaction</div>
               <div class="card-value" style="font-size:1.7rem">{{ $satisfactionPercentage }}%</div>
               <div class="sat-bar-track">
-                <div class="sat-bar-fill" id="satBar"  {{ $satisfactionPercentage }}%"></div>
+                <div class="sat-bar-fill" id="satBar" style="width: {{ $satisfactionPercentage }}%;"></div>
               </div>
             </div>
           </div>

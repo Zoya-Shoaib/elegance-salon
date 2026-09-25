@@ -2,16 +2,14 @@
 
 @section('content')
 
-<div class="p-8">
-
-    
-        <h2 class="font-serif text-4xl font-bold text-primary-container">
+<div class="flex-grow p-4 sm:p-6 lg:p-8 overflow-y-auto scrollbar-lux">
+        <h2 class="font-serif text-2xl sm:text-4xl font-bold text-primary-container mb-4 sm:mb-6">
             Appointments List
         </h2>
-        <div class="flex justify-between items-center mb-8">
+        <div class="flex justify-between items-center mb-6">
         @if(session('success'))
 
-<div class="w-full mb-6 p-4 rounded-lg bg-green-100 border border-green-400 text-green-700">
+<div class="w-full mb-4 p-4 rounded-lg bg-green-100 border border-green-400 text-green-700">
 
     {{ session('success') }}
 
@@ -22,8 +20,8 @@
     
 
    <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-secondary/20">
-<div class="overflow-x-auto">
-        <table class="w-full">
+<div class="overflow-x-auto scrollbar-lux">
+        <table class="w-full min-w-[750px]">
 
             <thead class="bg-primary-container text-white">
 
@@ -150,9 +148,9 @@
    </div>
 
 </div>
-<div id="editModal" class="fixed inset-0 hidden bg-black/50 flex items-center justify-center z-50">
-    <div class="bg-white rounded-2xl w-full max-w-xl p-8 max-h-[90vh] overflow-y-auto">
-        <h2 class="text-2xl font-bold text-primary-container mb-6">
+<div id="editModal" class="fixed inset-0 hidden bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl w-full max-w-xl p-5 sm:p-8 max-h-[90vh] overflow-y-auto my-auto">
+        <h2 class="text-xl sm:text-2xl font-bold text-primary-container mb-6">
             Update Appointment
         </h2>
 

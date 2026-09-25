@@ -1,14 +1,14 @@
 @extends('admin.layouts.admin_layout')
 @section('content')
-<div class="flex-grow p-8 overflow-y-auto scrollbar-lux">
-  <div class="mb-8">
-    <h2 class="font-serif text-3xl font-bold text-primary">Website Feedback</h2>
+<div class="flex-grow p-4 sm:p-6 lg:p-8 overflow-y-auto scrollbar-lux">
+  <div class="mb-6 sm:mb-8">
+    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-primary">Website Feedback</h2>
     <p class="text-sm text-gray-500">View and manage user feedback and bug reports.</p>
   </div>
 
   <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-    <div class="overflow-x-auto">
-      <table class="w-full text-left border-collapse">
+    <div class="overflow-x-auto scrollbar-lux">
+      <table class="w-full text-left border-collapse min-w-[640px]">
         <thead>
           <tr class="bg-primary-container text-white text-xs uppercase tracking-wider">
             <th class="p-4 font-medium">Name</th>

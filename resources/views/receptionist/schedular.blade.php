@@ -2,7 +2,7 @@
 @section('content')
 
     <!-- Content Area -->
-    <div class="flex-grow p-8 overflow-y-auto scrollbar-lux flex flex-col">
+    <div class="flex-grow p-4 sm:p-6 lg:p-8 overflow-y-auto scrollbar-lux flex flex-col">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
           <h2 class="font-serif text-3xl font-bold text-primary">Appointment Scheduling</h2>
@@ -45,22 +45,16 @@
           <div class="bg-surface border border-secondary/20 rounded-2xl p-6 shadow-lg">
             <h4 class="font-bold text-primary mb-4 text-sm uppercase tracking-wider">Filter by Stylist</h4>
             <div class="space-y-3">
-              <label class="flex items-center gap-3 cursor-pointer">
-                <input type="checkbox" checked="" class="form-checkbox text-primary rounded border-gray-300 focus:ring-primary">
-                <span class="text-sm">Clarissa Gold (Hair)</span>
-              </label>
-              <label class="flex items-center gap-3 cursor-pointer">
-                <input type="checkbox" checked="" class="form-checkbox text-secondary rounded border-gray-300 focus:ring-secondary">
-                <span class="text-sm">Dr. Helen (Skin)</span>
-              </label>
-              <label class="flex items-center gap-3 cursor-pointer">
-                <input type="checkbox" checked="" class="form-checkbox text-blue-500 rounded border-gray-300 focus:ring-blue-500">
-                <span class="text-sm">Mia Valentina (Nails)</span>
-              </label>
-              <label class="flex items-center gap-3 cursor-pointer">
-                <input type="checkbox" checked="" class="form-checkbox text-purple-500 rounded border-gray-300 focus:ring-purple-500">
-                <span class="text-sm">Victoria (Makeup)</span>
-              </label>
+              @forelse($staff as $stf)
+                @if($stf->role === 'stylist')
+                <label class="flex items-center gap-3 cursor-pointer">
+                  <input type="checkbox" checked="" class="form-checkbox text-primary rounded border-gray-300 focus:ring-primary">
+                  <span class="text-sm">{{ $stf->full_name }}</span>
+                </label>
+                @endif
+              @empty
+                <p class="text-xs text-gray-400">No stylists found.</p>
+              @endforelse
             </div>
           </div>
           <!-- Integration Widget -->
@@ -90,8 +84,8 @@
             </div>
           </div>
           <!-- Grid Body (Hours & Appointments) -->
-          <div class="flex-grow overflow-y-auto scrollbar-lux relative">
-            <div class="flex relative min-h-[800px]">
+          <div class="flex-grow overflow-x-auto scrollbar-lux">
+            <div class="flex relative min-h-[800px] min-w-[650px]">
               <!-- Time Column -->
               <div class="w-16 shrink-0 border-r border-gray-200 flex flex-col divide-y divide-gray-100 text-[10px] text-gray-400 font-bold text-center">
                 @for($h = 9; $h <= 18; $h++)
@@ -134,16 +128,17 @@
 
   <!-- Modals (Hidden by Default) -->
   <!-- Book Appointment Modal -->
-  <div id="bookingModal" class="fixed inset-0 z-[100] modal-overlay hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl border border-secondary/20 overflow-hidden transform transition-all">
-      <div class="bg-primary-container p-6 flex justify-between items-center text-white border-b border-secondary/30">
-        <h3 class="font-serif text-2xl font-bold text-secondary">Book Appointment</h3>
+  <div id="bookingModal" class="fixed inset-0 z-[100] modal-overlay hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl border border-secondary/20 overflow-hidden transform transition-all my-auto max-h-[90vh] flex flex-col">
+      <div class="bg-primary-container p-5 sm:p-6 flex justify-between items-center text-white border-b border-secondary/30 shrink-0">
+        <h3 class="font-serif text-xl sm:text-2xl font-bold text-secondary">Book Appointment</h3>
         <button class="text-white/60 hover:text-white transition-colors" onclick="document.getElementById('bookingModal').classList.add('hidden')">
           <i class="fas fa-times text-xl"></i>
         </button>
       </div>
-      <div class="p-8">
-        <form class="space-y-6" onsubmit="event.preventDefault(); document.getElementById('bookingModal').classList.add('hidden');">
+      <div class="p-5 sm:p-8 overflow-y-auto scrollbar-lux flex-grow">
+        <form class="space-y-6" action="{{ route('receptionist.appointments.store') }}" method="POST">
+          @csrf
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Client Selection -->
             <div>

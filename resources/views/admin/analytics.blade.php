@@ -2,7 +2,7 @@
 @section('content')
   
     <!-- Content Area -->
-    <div class="flex-grow p-8 overflow-y-auto scrollbar-lux">
+    <div class="flex-grow p-4 sm:p-6 lg:p-8 overflow-y-auto scrollbar-lux">
       <!-- Top Filter & Date Selector Bar -->
       <div class="bg-surface border border-secondary/20 rounded-2xl p-4 shadow-md mb-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-3 w-full sm:w-auto">
@@ -190,8 +190,8 @@
         <div class="p-6 border-b border-gray-100 bg-gray-50/50">
           <h4 class="font-serif text-lg font-bold text-primary">Stylist Performance &amp; Commission</h4>
         </div>
-        <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse text-sm">
+        <div class="overflow-x-auto scrollbar-lux">
+          <table class="w-full text-left border-collapse text-sm min-w-[700px]">
             <thead>
               <tr class="bg-gray-50 text-[10px] uppercase tracking-wider text-gray-500 border-b border-gray-100">
                 <th class="p-4 font-bold">Stylist Name</th>
@@ -234,8 +234,8 @@
         <div class="p-6 border-b border-gray-100 bg-gray-50/50">
           <h4 class="font-serif text-lg font-bold text-primary">Inventory Product Usage Trends</h4>
         </div>
-        <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse text-sm">
+        <div class="overflow-x-auto scrollbar-lux">
+          <table class="w-full text-left border-collapse text-sm min-w-[600px]">
             <thead>
               <tr class="bg-gray-50 text-[10px] uppercase tracking-wider text-gray-500 border-b border-gray-100">
                 <th class="p-4 font-bold">Product Name</th>
@@ -280,9 +280,9 @@
     </div>
  
   <!-- Modals -->
-  <div id="exportModal" class="fixed inset-0 z-[100] modal-overlay hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md border border-secondary/20 overflow-hidden transform transition-all text-center">
-      <div class="p-8">
+  <div id="exportModal" class="fixed inset-0 z-[100] modal-overlay hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md border border-secondary/20 overflow-hidden transform transition-all text-center my-auto p-6 sm:p-8">
+      <div>
         <div class="w-16 h-16 rounded-full bg-green-50 text-green-500 border border-green-200 flex items-center justify-center text-3xl mx-auto mb-6">
           <i class="fas fa-file-invoice"></i>
         </div>

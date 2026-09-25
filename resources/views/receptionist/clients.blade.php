@@ -2,7 +2,7 @@
 @section('content')
 
     <!-- Content Area -->
-    <div class="flex-grow p-8 overflow-y-auto scrollbar-lux">
+    <div class="flex-grow p-4 sm:p-6 lg:p-8 overflow-y-auto scrollbar-lux">
       <!-- Top Actions & Search -->
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
         <div>
@@ -93,16 +93,17 @@
   
   <!-- Modals (Hidden by Default) -->
   <!-- Add/Edit Client Modal -->
-  <div id="clientModal" class="fixed inset-0 z-[100] modal-overlay hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl border border-secondary/20 overflow-hidden transform transition-all">
-      <div class="bg-primary-container p-6 flex justify-between items-center text-white border-b border-secondary/30">
-        <h3 class="font-serif text-2xl font-bold text-secondary">Client Profile Form</h3>
+  <div id="clientModal" class="fixed inset-0 z-[100] modal-overlay hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl border border-secondary/20 overflow-hidden transform transition-all my-auto max-h-[90vh] flex flex-col">
+      <div class="bg-primary-container p-5 sm:p-6 flex justify-between items-center text-white border-b border-secondary/30 shrink-0">
+        <h3 class="font-serif text-xl sm:text-2xl font-bold text-secondary">Client Profile Form</h3>
         <button class="text-white/60 hover:text-white transition-colors" onclick="document.getElementById('clientModal').classList.add('hidden')">
           <i class="fas fa-times text-xl"></i>
         </button>
       </div>
-      <div class="p-8">
-        <form class="space-y-6" onsubmit="event.preventDefault(); document.getElementById('clientModal').classList.add('hidden');">
+      <div class="p-5 sm:p-8 overflow-y-auto scrollbar-lux flex-grow">
+        <form class="space-y-6" action="{{ route('receptionist.clients.store') }}" method="POST">
+          @csrf
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label class="block text-[10px] font-bold uppercase tracking-widest text-primary mb-2">Full Name</label>

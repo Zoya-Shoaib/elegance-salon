@@ -1,18 +1,18 @@
 @extends('admin.layouts.admin_layout')
 @section('content')
     <!-- Content Area -->
-    <div class="flex-grow p-8 overflow-y-auto scrollbar-lux">
-      <div class="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div class="flex-grow p-4 sm:p-6 lg:p-8 overflow-y-auto scrollbar-lux">
+      <div class="mb-6 sm:mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 class="font-serif text-3xl font-bold text-primary">Inventory Vault</h2>
-          <p class="text-sm text-gray-500">Monitor stock levels, track usage, and manage supplier purchase orders.</p>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-primary">Inventory Vault</h2>
+          <p class="text-xs sm:text-sm text-gray-500">Monitor stock levels, track usage, and manage supplier purchase orders.</p>
         </div>
-        <div class="flex items-center gap-3">
-          <div class="relative">
-            <input type="text" placeholder="Search inventory..." class="w-64 pl-10 pr-4 py-2 border border-secondary/30 rounded-full text-sm bg-surface shadow-sm focus:ring-1 focus:ring-primary focus:border-primary">
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
+          <div class="relative w-full sm:w-64">
+            <input type="text" placeholder="Search inventory..." class="w-full pl-10 pr-4 py-2 border border-secondary/30 rounded-full text-sm bg-surface shadow-sm focus:ring-1 focus:ring-primary focus:border-primary">
             <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
           </div>
-          <button class="bg-secondary text-primary-container font-bold text-xs px-5 py-2.5 rounded-full hover:bg-[#EDD98A] transition-colors flex items-center gap-1.5 shadow-lg" onclick="document.getElementById('addItemModal').classList.remove('hidden')">
+          <button class="bg-secondary text-primary-container font-bold text-xs px-5 py-2.5 rounded-full hover:bg-[#EDD98A] transition-colors flex items-center justify-center gap-1.5 shadow-lg shrink-0" onclick="document.getElementById('addItemModal').classList.remove('hidden')">
             <span class="material-symbols-outlined text-sm">add_circle</span>
             <span>Add Item</span>
           </button>
@@ -28,8 +28,8 @@
                 <span class="bg-red-100 text-red-700 border border-red-200 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">3 Low Stock</span>
               </div>
             </div>
-            <div class="overflow-x-auto">
-              <table class="w-full text-left border-collapse">
+            <div class="overflow-x-auto scrollbar-lux">
+              <table class="w-full text-left border-collapse min-w-[700px]">
                 <thead>
                   <tr class="text-[10px] uppercase tracking-wider text-gray-500 border-b border-gray-100">
                     <th class="p-4 font-bold">Item &amp; Category</th>
@@ -191,15 +191,15 @@
  
   <!-- Modals -->
   <!-- Add Item Modal -->
-  <div id="addItemModal" class="fixed inset-0 z-[100] modal-overlay hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl border border-secondary/20 overflow-hidden transform transition-all">
-      <div class="bg-primary-container p-6 flex justify-between items-center text-white border-b border-secondary/30">
-        <h3 class="font-serif text-2xl font-bold text-secondary">Add New Inventory Item</h3>
+  <div id="addItemModal" class="fixed inset-0 z-[100] modal-overlay hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl border border-secondary/20 overflow-hidden transform transition-all my-auto max-h-[90vh] flex flex-col">
+      <div class="bg-primary-container p-5 sm:p-6 flex justify-between items-center text-white border-b border-secondary/30 shrink-0">
+        <h3 class="font-serif text-xl sm:text-2xl font-bold text-secondary">Add New Inventory Item</h3>
         <button class="text-white/60 hover:text-white transition-colors" onclick="document.getElementById('addItemModal').classList.add('hidden')">
           <i class="fas fa-times text-xl"></i>
         </button>
       </div>
-      <div class="p-8">
+      <div class="p-5 sm:p-8 overflow-y-auto scrollbar-lux">
         <form class="space-y-6" action="{{route('insert.inventory')}}" method="POST">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -250,15 +250,15 @@
     </div>
   </div>
   <!-- Edit Item Modal -->
-  <div id="editItemModal" class="fixed inset-0 z-[100] modal-overlay hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl border border-secondary/20 overflow-hidden transform transition-all">
-      <div class="bg-primary-container p-6 flex justify-between items-center text-white border-b border-secondary/30">
-        <h3 class="font-serif text-2xl font-bold text-secondary">Edit Inventory Item</h3>
+  <div id="editItemModal" class="fixed inset-0 z-[100] modal-overlay hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl border border-secondary/20 overflow-hidden transform transition-all my-auto max-h-[90vh] flex flex-col">
+      <div class="bg-primary-container p-5 sm:p-6 flex justify-between items-center text-white border-b border-secondary/30 shrink-0">
+        <h3 class="font-serif text-xl sm:text-2xl font-bold text-secondary">Edit Inventory Item</h3>
         <button class="text-white/60 hover:text-white transition-colors" onclick="document.getElementById('editItemModal').classList.add('hidden')">
           <i class="fas fa-times text-xl"></i>
         </button>
       </div>
-      <div class="p-8">
+      <div class="p-5 sm:p-8 overflow-y-auto scrollbar-lux">
         <form class="space-y-6" id="editModal" method="POST" >
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>

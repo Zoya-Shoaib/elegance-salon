@@ -1,7 +1,7 @@
 @extends('admin.layouts.admin_layout')
 @section('content')
 
-    <!-- Top Notification Toast (Dynamic Low Inventory Alert) -->
+    <!-- Top Notification Toast (Dynamic Low Inventory Alert)
     @if(isset($lowStockCount) && $lowStockCount > 0)
       <div class="absolute top-24 left-1/2 transform -translate-x-1/2 z-50 bg-[#FFF5F5] border-l-4 border-[#F87171] shadow-xl rounded-r-lg p-3 min-w-[400px] flex gap-3 items-center">
         <span class="material-symbols-outlined text-[#991B1B]">warning</span>
@@ -10,12 +10,12 @@
           <span class="text-gray-700">{{ $lowStockCount }} items in inventory are running low on stock.</span>
         </div>
       </div>
-    @endif
+    @endif -->
     
     <!-- Content Area -->
-    <div class="flex-grow p-8 overflow-y-auto scrollbar-lux">
+    <div class="flex-grow p-4 sm:p-6 lg:p-8 overflow-y-auto scrollbar-lux">
       <div class="mb-8">
-        <h2 class="font-serif text-3xl font-bold text-primary">Salon Performance Overview</h2>
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-primary">Salon Performance Overview</h2>
         <p class="text-sm text-gray-500">Live analytics and operational summary for today.</p>
       </div>
 
@@ -128,7 +128,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> 
 
       <!-- Live Salon Queue Tracker & Peak Hours -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -138,8 +138,8 @@
             <h4 class="font-serif text-lg font-bold text-primary">Recent Scheduled Appointments</h4>
             <span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Live Queue</span>
           </div>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
+          <div class="overflow-x-auto scrollbar-lux">
+            <table class="w-full text-left border-collapse min-w-[600px]">
               <thead>
                 <tr class="bg-[#FAF8F3]/50 text-[10px] uppercase tracking-wider text-gray-500 border-b border-gray-100">
                   <th class="p-4 font-bold">Client Name</th>
@@ -156,10 +156,10 @@
                       {{ $appointment->client->full_name ?? $appointment->client->name ?? 'Guest Client' }}
                     </td>
                     <td class="p-4 text-gray-600">
-                      {{ $appointment->staff->full_name ?? 'Unassigned' }}
+                      {{ $appointment->stylist->full_name ?? 'Unassigned' }}
                     </td>
                     <td class="p-4 text-gray-600">
-                      {{ $appointment->service->name ?? 'General Service' }}
+                      {{ $appointment->service1->name ?? 'General Service' }}
                     </td>
                     <td class="p-4 text-gray-600 font-mono">
                       {{ $appointment->appointment_time ?? $appointment->time_slot ?? '10:00 AM' }}

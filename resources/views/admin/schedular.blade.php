@@ -2,18 +2,18 @@
 @section('content')
  
     <!-- Content Area -->
-    <div class="flex-grow p-8 overflow-y-auto scrollbar-lux flex flex-col">
+    <div class="flex-grow p-4 sm:p-6 lg:p-8 overflow-y-auto scrollbar-lux flex flex-col">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
-          <h2 class="font-serif text-3xl font-bold text-primary">Appointment Scheduling</h2>
-          <p class="text-sm text-gray-500">Manage weekly bookings and staff availability.</p>
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-primary">Appointment Scheduling</h2>
+          <p class="text-xs sm:text-sm text-gray-500">Manage weekly bookings and staff availability.</p>
         </div>
-        <div class="flex items-center gap-3">
-          <button class="bg-surface border border-secondary text-primary font-bold text-xs px-5 py-3 rounded-full hover:bg-background transition-colors flex items-center gap-1.5 shadow-sm">
+        <div class="flex flex-wrap sm:flex-nowrap items-center gap-2 sm:gap-3">
+          <button class="bg-surface border border-secondary text-primary font-bold text-xs px-4 sm:px-5 py-2.5 sm:py-3 rounded-full hover:bg-background transition-colors flex items-center gap-1.5 shadow-sm">
             <span class="material-symbols-outlined text-sm">edit_calendar</span>
             <span>Reschedule Slot</span>
           </button>
-          <button class="bg-secondary text-primary-container font-bold text-xs px-5 py-3 rounded-full hover:bg-[#EDD98A] transition-colors flex items-center gap-1.5 shadow-lg" onclick="openCreateModal()">
+          <button class="bg-secondary text-primary-container font-bold text-xs px-4 sm:px-5 py-2.5 sm:py-3 rounded-full hover:bg-[#EDD98A] transition-colors flex items-center gap-1.5 shadow-lg" onclick="openCreateModal()">
             <span class="material-symbols-outlined text-sm">calendar_add_on</span>
             <span>Book Appointment</span>
           </button>
@@ -61,12 +61,12 @@
         <!-- Right Panel: Dynamic Weekly Grid Schedule -->
         <div class="lg:col-span-3 bg-surface border border-secondary/20 rounded-2xl shadow-lg flex flex-col overflow-hidden">
           <!-- Week Controls Toolbar Header -->
-          <div class="flex items-center justify-between px-6 py-3 bg-white border-b border-gray-200">
+          <div class="flex items-center justify-between px-4 sm:px-6 py-3 bg-white border-b border-gray-200 shrink-0">
             <div class="flex items-center gap-2">
               <a href="?date={{ $selectedDate->copy()->subWeek()->format('Y-m-d') }}" class="p-2 text-gray-500 hover:text-primary transition-colors">
                 <i class="fas fa-chevron-left"></i>
               </a>
-              <span class="font-serif text-sm font-bold text-primary">
+              <span class="font-serif text-xs sm:text-sm font-bold text-primary">
                 {{ $selectedDate->copy()->startOfWeek()->format('M d') }} - {{ $selectedDate->copy()->endOfWeek()->format('M d, Y') }}
               </span>
               <a href="?date={{ $selectedDate->copy()->addWeek()->format('Y-m-d') }}" class="p-2 text-gray-500 hover:text-primary transition-colors">
@@ -78,55 +78,60 @@
             </a>
           </div>
 
-          <!-- Grid Header (Dynamic Days) -->
-          <div class="flex bg-gray-50 border-b border-gray-200">
-            <div class="w-16 shrink-0 border-r border-gray-200"></div>
-            <div class="flex-grow grid grid-cols-7 divide-x divide-gray-200">
-              @foreach($weekDays as $day)
-                <div class="p-3 text-center {{ $day['is_today'] ? 'bg-secondary/10 border-b-2 border-b-secondary' : '' }}">
-                  <div class="text-[10px] font-bold uppercase {{ $day['is_today'] ? 'text-secondary' : 'text-gray-500' }}">{{ $day['name'] }}</div>
-                  <div class="text-lg font-serif font-bold text-primary">{{ $day['date_num'] }}</div>
+          <!-- Horizontal Scroll Wrapper for Week Grid -->
+          <div class="overflow-x-auto scrollbar-lux flex-grow flex flex-col">
+            <div class="min-w-[650px] flex flex-col flex-grow">
+              <!-- Grid Header (Dynamic Days) -->
+              <div class="flex bg-gray-50 border-b border-gray-200">
+                <div class="w-16 shrink-0 border-r border-gray-200"></div>
+                <div class="flex-grow grid grid-cols-7 divide-x divide-gray-200">
+                  @foreach($weekDays as $day)
+                    <div class="p-3 text-center {{ $day['is_today'] ? 'bg-secondary/10 border-b-2 border-b-secondary' : '' }}">
+                      <div class="text-[10px] font-bold uppercase {{ $day['is_today'] ? 'text-secondary' : 'text-gray-500' }}">{{ $day['name'] }}</div>
+                      <div class="text-base sm:text-lg font-serif font-bold text-primary">{{ $day['date_num'] }}</div>
+                    </div>
+                  @endforeach
                 </div>
-              @endforeach
-            </div>
-          </div>
-
-          <!-- Grid Body (Hours & Dynamic Appointments) -->
-          <div class="flex-grow overflow-y-auto scrollbar-lux relative">
-            <div class="flex relative min-h-[800px]">
-              <!-- Time Column -->
-              <div class="w-16 shrink-0 border-r border-gray-200 flex flex-col divide-y divide-gray-100 text-[10px] text-gray-400 font-bold text-center">
-                @for($h = 9; $h <= 18; $h++)
-                  <div class="h-20 flex items-start justify-center pt-2">{{ date('g:i A', strtotime("$h:00")) }}</div>
-                @endfor
               </div>
 
-              <!-- Days Columns (Background grid) -->
-              <div class="flex-grow grid grid-cols-7 divide-x divide-gray-100 absolute inset-0 left-16 z-0">
-                @foreach($weekDays as $day)
-                  <div class="flex flex-col divide-y divide-gray-50 {{ $day['is_today'] ? 'bg-secondary/5' : '' }}">
+              <!-- Grid Body (Hours & Dynamic Appointments) -->
+              <div class="flex-grow overflow-y-auto scrollbar-lux relative">
+                <div class="flex relative min-h-[800px]">
+                  <!-- Time Column -->
+                  <div class="w-16 shrink-0 border-r border-gray-200 flex flex-col divide-y divide-gray-100 text-[10px] text-gray-400 font-bold text-center">
                     @for($h = 9; $h <= 18; $h++)
-                      <div class="h-20"></div>
+                      <div class="h-20 flex items-start justify-center pt-2">{{ date('g:i A', strtotime("$h:00")) }}</div>
                     @endfor
                   </div>
-                @endforeach
-              </div>
 
-              <!-- Dynamic Rendered Appointment Blocks (z-10) -->
-              <div class="absolute inset-0 left-16 z-10 pointer-events-none">
-                @foreach($gridAppointments as $apt)
-                  <div 
-                    onclick="editAppointment('{{ $apt['id'] }}', '{{ $apt['client_id'] }}', '{{ $apt['stylist_id'] }}', '{{ $apt['service_id_1'] }}', '{{ $apt['date'] }}', '{{ $apt['time'] }}')"
-                    class="absolute w-[calc(14.28%-8px)] bg-emerald-50 border-l-4 border-primary shadow-md rounded-r p-2 cursor-pointer pointer-events-auto hover:bg-emerald-100 transition-colors"
-                    style="left: calc({{ $apt['day_index'] * 14.28 }}% + 4px); top: {{ $apt['top_px'] }}px; height: {{ $apt['height_px'] }}px;"
-                  >
-                    <div class="text-[10px] font-bold text-primary">{{ $apt['time_formatted'] }}</div>
-                    <div class="text-xs font-bold text-gray-800 truncate">{{ $apt['client_name'] }}</div>
-                    <div class="text-[10px] text-gray-500 truncate">{{ $apt['service_name'] }} ({{ $apt['stylist_name'] }})</div>
+                  <!-- Days Columns (Background grid) -->
+                  <div class="flex-grow grid grid-cols-7 divide-x divide-gray-100 absolute inset-0 left-16 z-0">
+                    @foreach($weekDays as $day)
+                      <div class="flex flex-col divide-y divide-gray-50 {{ $day['is_today'] ? 'bg-secondary/5' : '' }}">
+                        @for($h = 9; $h <= 18; $h++)
+                          <div class="h-20"></div>
+                        @endfor
+                      </div>
+                    @endforeach
                   </div>
-                @endforeach
-              </div>
 
+                  <!-- Dynamic Rendered Appointment Blocks (z-10) -->
+                  <div class="absolute inset-0 left-16 z-10 pointer-events-none">
+                    @foreach($gridAppointments as $apt)
+                      <div 
+                        onclick="editAppointment('{{ $apt['id'] }}', '{{ $apt['client_id'] }}', '{{ $apt['stylist_id'] }}', '{{ $apt['service_id_1'] }}', '{{ $apt['date'] }}', '{{ $apt['time'] }}')"
+                        class="absolute w-[calc(14.28%-8px)] bg-emerald-50 border-l-4 border-primary shadow-md rounded-r p-2 cursor-pointer pointer-events-auto hover:bg-emerald-100 transition-colors"
+                        style="left: calc({{ $apt['day_index'] * 14.28 }}% + 4px); top: {{ $apt['top_px'] }}px; height: {{ $apt['height_px'] }}px;"
+                      >
+                        <div class="text-[10px] font-bold text-primary">{{ $apt['time_formatted'] }}</div>
+                        <div class="text-xs font-bold text-gray-800 truncate">{{ $apt['client_name'] }}</div>
+                        <div class="text-[10px] text-gray-500 truncate">{{ $apt['service_name'] }} ({{ $apt['stylist_name'] }})</div>
+                      </div>
+                    @endforeach
+                  </div>
+
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -135,17 +140,17 @@
  
   <!-- Modals (Hidden by Default) -->
   <!-- Book Appointment Modal -->
-  <div id="bookingModal" class="fixed inset-0 z-[100] modal-overlay hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl border border-secondary/20 overflow-hidden transform transition-all">
-      <div class="bg-primary-container p-6 flex justify-between items-center text-white border-b border-secondary/30">
-        <h3 id="modalTitle" class="font-serif text-2xl font-bold text-secondary">
+  <div id="bookingModal" class="fixed inset-0 z-[100] modal-overlay hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl border border-secondary/20 overflow-hidden transform transition-all my-auto max-h-[90vh] flex flex-col">
+      <div class="bg-primary-container p-5 sm:p-6 flex justify-between items-center text-white border-b border-secondary/30 shrink-0">
+        <h3 id="modalTitle" class="font-serif text-xl sm:text-2xl font-bold text-secondary">
           Book Appointment
         </h3>
         <button class="text-white/60 hover:text-white transition-colors" onclick="document.getElementById('bookingModal').classList.add('hidden')">
           <i class="fas fa-times text-xl"></i>
         </button>
       </div>
-      <div class="p-8">
+      <div class="p-5 sm:p-8 overflow-y-auto scrollbar-lux flex-grow">
         <form id="appointmentForm" action="{{ route('appointments.store') }}" method="POST" class="space-y-6">
           @csrf
           <input type="hidden" id="appointment_id" name="appointment_id">

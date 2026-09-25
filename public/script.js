@@ -326,4 +326,37 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('is_active').value = this.dataset.active;
         });
     });
+
+    // ─── Responsive Portal Sidebar (Admin, Receptionist, Stylist) ───
+    var sidebar = document.getElementById('portalSidebar');
+    var toggleBtn = document.getElementById('sidebarToggle');
+    var closeBtn = document.getElementById('sidebarClose');
+    var backdrop = document.getElementById('sidebarBackdrop');
+
+    function openSidebar() {
+      if (sidebar) {
+        sidebar.classList.remove('-translate-x-full');
+        sidebar.classList.add('translate-x-0');
+      }
+      if (backdrop) {
+        backdrop.classList.remove('hidden');
+      }
+    }
+
+    function closeSidebar() {
+      if (sidebar) {
+        sidebar.classList.remove('translate-x-0');
+        sidebar.classList.add('-translate-x-full');
+      }
+      if (backdrop) {
+        backdrop.classList.add('hidden');
+      }
+    }
+
+    if (toggleBtn) toggleBtn.addEventListener('click', openSidebar);
+    if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+    if (backdrop) backdrop.addEventListener('click', closeSidebar);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeSidebar();
+    });
 });
